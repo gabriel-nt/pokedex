@@ -55,6 +55,6 @@ export const MenuContainer = styled.div`
   > svg {
     font-size: 24px;
     margin-left: 60px;
-    color: ${({ theme }) => theme.colors.white};
+    color: #333;
   }
 `;
