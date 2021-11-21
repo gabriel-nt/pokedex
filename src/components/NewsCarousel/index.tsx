@@ -16,10 +16,6 @@ const NewsCarousel = () => {
   return (
     <Container>
       <Swiper
-        effect="fade"
-        fadeEffect={{
-          crossFade: true,
-        }}
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,

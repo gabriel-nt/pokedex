@@ -23,6 +23,7 @@ const Card = ({ data }: CardProps) => (
           height={190}
           src={data.image}
           alt={data.name}
+          placeholder="empty"
         />
       )}
     </ImageContainer>

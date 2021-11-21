@@ -1,17 +1,13 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { TypePokemon } from '../@types';
 
 import { Card } from '../components/Card';
 import { Header } from '../components/Header';
+import { Loader } from '../components/Loader';
+import { Navigation } from '../components/Navigation';
 import { api } from '../services/api';
-import {
-  Container,
-  Content,
-  NavigationContainer,
-  NavigationLink,
-} from '../styles/pages/pokemons';
+import { Container, Content } from '../styles/pages/pokemons';
 
 export type Pokemon = {
   id: number;
@@ -51,6 +47,7 @@ type PokemonResponse = {
 };
 
 const Pokemons: NextPage = () => {
+  const [loaded, setLoaded] = useState(false);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
@@ -85,6 +82,7 @@ const Pokemons: NextPage = () => {
           ) as PromiseFulfilledResult<Pokemon>[]
         ).map(value => value.value);
 
+        setLoaded(true);
         setPokemons(sucessulRequests);
       });
     }
@@ -94,40 +92,17 @@ const Pokemons: NextPage = () => {
 
   return (
     <Container>
-      <Header />
-      <NavigationContainer>
-        <div>
-          <Link href="/" passHref>
-            <NavigationLink active>I</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>II</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>III</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>IV</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>V</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>VI</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>VII</NavigationLink>
-          </Link>
-          <Link href="/" passHref>
-            <NavigationLink active={false}>VIII</NavigationLink>
-          </Link>
-        </div>
-      </NavigationContainer>
-      <Content>
-        {pokemons.map(pokemon => (
-          <Card key={pokemon.id} data={pokemon} />
-        ))}
-      </Content>
+      <Header showSearch={false} />
+      <Navigation />
+      {!loaded ? (
+        <Loader />
+      ) : (
+        <Content>
+          {pokemons.map(pokemon => (
+            <Card key={pokemon.id} data={pokemon} />
+          ))}
+        </Content>
+      )}
     </Container>
   );
 };

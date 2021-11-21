@@ -8,14 +8,21 @@ import {
 } from './styles';
 
 import logoImg from '../../assets/logo.png';
+import Link from 'next/link';
 
-const Header = () => (
+type HeaderProps = {
+  showSearch?: boolean;
+};
+
+const Header = ({ showSearch = true }: HeaderProps) => (
   <Container>
     <ImageContainer>
-      <Image src={logoImg} width={640} height={360} alt="Logo Pokémon" />
+      <Link href="/" passHref>
+        <Image src={logoImg} width={640} height={360} alt="Logo Pokémon" />
+      </Link>
     </ImageContainer>
 
-    <MenuContainer>
+    <MenuContainer showSearch={showSearch}>
       <InputContainer>
         <input type="text" placeholder="Search" />
         <AiOutlineSearch />

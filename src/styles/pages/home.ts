@@ -43,9 +43,9 @@ export const InfomationContainer = styled.div`
     font-family: 'Roboto';
   }
 
-  button {
+  a {
     padding: 8px 20px;
-    display: block;
+    display: inline-block;
     border-radius: 20px;
     color: #fff;
     margin-top: 32px;

@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Pokedex</title>
+        <title>Pokédex</title>
         <meta name="title" content="Pokedex" />
         <meta name="description" content="Pokedex" />
 
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Roboto:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/pokeball.svg" />
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />

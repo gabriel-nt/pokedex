@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { NextPage } from 'next';
 import { Header } from '../components/Header';
 import { Container, InfomationContainer } from '../styles/pages/home';
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
               listagem dos pokémons e suas principais informações.
             </p>
 
-            <button>Ver Pokémons</button>
+            <Link href="/pokemons">Ver Pokémons</Link>
           </div>
 
           <div>
