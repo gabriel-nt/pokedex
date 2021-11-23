@@ -13,6 +13,11 @@ export const Container = styled.header`
   padding: 10px 40px;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 500px) {
+    padding: 10px 20px;
+    flex-direction: column;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -55,10 +60,6 @@ export const InputContainer = styled.div`
       cursor: pointer;
     }
   }
-
-  @media (max-width: 602px) {
-    display: none;
-  }
 `;
 
 export const MenuContainer = styled.div<IMenuContainerProps>`
@@ -70,5 +71,14 @@ export const MenuContainer = styled.div<IMenuContainerProps>`
     font-size: 1.5rem;
     margin-left: 60px;
     color: ${({ showSearch }) => (showSearch ? '#fff' : '#333')};
+  }
+
+  @media (max-width: 516px) {
+    width: 100%;
+    justify-content: space-between;
+
+    > svg {
+      margin-left: 24px;
+    }
   }
 `;

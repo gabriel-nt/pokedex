@@ -55,6 +55,14 @@ export const Container = styled.div<ISelectProps>`
       transform: rotate(-360deg);
     }
   }
+
+  @media (max-width: 365px) {
+    min-width: auto;
+
+    label {
+      padding: 0 8px 0 12px;
+    }
+  }
 `;
 
 export const ListOptions = styled.ul<ISelectProps>`

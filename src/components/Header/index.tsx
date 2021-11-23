@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { AiOutlineSearch, AiOutlineMenu } from 'react-icons/ai';
 import {
@@ -7,8 +8,7 @@ import {
   MenuContainer,
 } from './styles';
 
-import logoImg from '../../assets/logo.png';
-import Link from 'next/link';
+import logoDesktopImg from '../../assets/logo.png';
 
 type HeaderProps = {
   showSearch?: boolean;
@@ -18,7 +18,12 @@ const Header = ({ showSearch = true }: HeaderProps) => (
   <Container>
     <ImageContainer>
       <Link href="/" passHref>
-        <Image src={logoImg} width={640} height={360} alt="Logo Pokémon" />
+        <Image
+          src={logoDesktopImg}
+          width={640}
+          height={360}
+          alt="Logo Pokémon"
+        />
       </Link>
     </ImageContainer>
 

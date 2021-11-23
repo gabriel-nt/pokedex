@@ -10,8 +10,17 @@ export const Container = styled.div`
   align-items: center;
   max-width: 1440px;
   justify-content: space-between;
-
   padding: 10px 40px;
+
+  @media (max-width: 832px) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 500px) {
+    margin: 0.5rem auto;
+    padding: 10px 28px;
+  }
 `;
 
 export const NavigationContainer = styled.div`
@@ -27,6 +36,12 @@ export const NavigationContainer = styled.div`
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 20%);
+  }
+
+  @media (max-width: 832px) {
+    & + div {
+      margin-bottom: 1.5em;
+    }
   }
 `;
 

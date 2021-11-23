@@ -9,7 +9,6 @@ export const Container = styled.div<IContainerProps>`
   min-width: 390px;
   padding: 32px;
   box-shadow: 0 0 20px 0 ${({ theme, type }) => theme.backgrounds[type]};
-  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 3px 3px; */
   position: relative;
   margin: 32px 20px;
   transition: all 0.8s ease;
@@ -37,6 +36,18 @@ export const Container = styled.div<IContainerProps>`
   &:hover {
     > .img-container {
       top: -36%;
+    }
+  }
+
+  @media (max-width: 500px) {
+    min-width: auto;
+    margin: 1rem 0.5rem;
+    padding: 1.6rem;
+
+    &:hover {
+      > .img-container {
+        top: 0;
+      }
     }
   }
 `;
@@ -84,6 +95,12 @@ export const Pokeball = styled.div`
     border-radius: 100%;
     background-color: currentColor;
   }
+
+  @media (max-width: 500px) {
+    right: 0;
+    bottom: 0;
+    height: auto;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -91,6 +108,14 @@ export const ImageContainer = styled.div`
   top: -28%;
   right: 4%;
   transition: top 0.8s ease;
+
+  @media (max-width: 500px) {
+    top: 0;
+    right: 0;
+    position: relative;
+    text-align: center;
+    margin-bottom: 8px;
+  }
 `;
 
 export const BadgeContainer = styled.div`
