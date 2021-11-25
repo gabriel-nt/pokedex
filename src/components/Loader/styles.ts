@@ -42,7 +42,7 @@ export const Container = styled.div`
     display: block;
     position: absolute;
     top: 50%;
-    margin-top: -1.4em;
+    margin-top: -1.45em;
     height: 1.2em;
     width: 1.2em;
     background-color: #ccc;

@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { TypePokemon } from '../@types';
 
 import { Card } from '../components/Card';
@@ -46,48 +46,79 @@ type PokemonResponse = {
   };
 };
 
+type LoadPokemonsParams = {
+  offset: number;
+  limit: number;
+  initial: boolean;
+};
+
 const Pokemons: NextPage = () => {
+  const DEFAULT_LIMIT = 81;
+  const DEFAULT_OFFSET = 81;
+
   const [loaded, setLoaded] = useState(false);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [allPokemons, setAllPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    async function loadPokemons() {
+    async function loadPokemons({
+      offset,
+      limit,
+      initial,
+    }: LoadPokemonsParams) {
       const { data } = await api.get<ListResponse>('/pokemon', {
         params: {
-          limit: 80,
+          offset,
+          limit,
         },
       });
 
-      const arrayPromises = data.results.map(item => {
-        return new Promise<Pokemon>(resolve => {
-          api.get<PokemonResponse>(`/pokemon/${item.name}`).then(response => {
-            const { data } = response;
+      if (data.count >= data.results.length + DEFAULT_LIMIT) {
+        const arrayPromises = data.results.map(item => {
+          return new Promise<Pokemon>(resolve => {
+            api.get<PokemonResponse>(`/pokemon/${item.name}`).then(response => {
+              const { data } = response;
 
-            const { id, name, sprites, types } = data;
+              const { id, name, sprites, types } = data;
 
-            return resolve({
-              id,
-              name,
-              types: types.map(type => type.type.name),
-              image: sprites.other['dream_world'].front_default,
+              return resolve({
+                id,
+                name,
+                types: types.map(type => type.type.name),
+                image: sprites.other['dream_world'].front_default,
+              });
             });
           });
         });
-      });
 
-      Promise.allSettled(arrayPromises).then(values => {
-        const sucessulRequests = (
-          values.filter(
-            res => res.status === 'fulfilled'
-          ) as PromiseFulfilledResult<Pokemon>[]
-        ).map(value => value.value);
+        Promise.allSettled(arrayPromises).then(values => {
+          const sucessulRequests = (
+            values.filter(
+              res => res.status === 'fulfilled'
+            ) as PromiseFulfilledResult<Pokemon>[]
+          ).map(value => value.value);
 
-        setLoaded(true);
-        setPokemons(sucessulRequests);
-      });
+          if (initial) {
+            setLoaded(true);
+            setPokemons(sucessulRequests);
+          }
+
+          setAllPokemons(prevState => [...prevState, ...sucessulRequests]);
+        });
+      }
     }
 
-    loadPokemons();
+    loadPokemons({
+      offset: 0,
+      initial: true,
+      limit: DEFAULT_LIMIT,
+    });
+
+    loadPokemons({
+      limit: 1500,
+      initial: false,
+      offset: DEFAULT_OFFSET,
+    });
   }, []);
 
   return (
