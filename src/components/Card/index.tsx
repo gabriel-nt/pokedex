@@ -1,7 +1,10 @@
 import Image from 'next/image';
+
 import { badges } from '../../assets/badges';
-import { Pokemon } from '../../pages/pokemons';
+
 import { formatId } from '../../utils';
+import { Pokemon } from '../../shared/interfaces/Pokemon';
+
 import { BadgeContainer, Container, ImageContainer, Pokeball } from './styles';
 
 interface CardProps {

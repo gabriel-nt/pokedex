@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { AiOutlineSearch, AiOutlineMenu } from 'react-icons/ai';
+
 import {
   Container,
   ImageContainer,
@@ -17,7 +18,7 @@ type HeaderProps = {
 const Header = ({ showSearch = true }: HeaderProps) => (
   <Container>
     <ImageContainer>
-      <Link href="/" passHref>
+      <Link href="/" passHref prefetch>
         <Image
           src={logoDesktopImg}
           width={640}

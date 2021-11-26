@@ -1,56 +1,21 @@
 import type { NextPage } from 'next';
-import { useCallback, useEffect, useState } from 'react';
-import { TypePokemon } from '../@types';
+import { useEffect, useState } from 'react';
 
+import { api } from '../services/api';
 import { Card } from '../components/Card';
 import { Header } from '../components/Header';
 import { Loader } from '../components/Loader';
 import { Navigation } from '../components/Navigation';
-import { api } from '../services/api';
+
+import { Pokemon } from '../shared/interfaces/Pokemon';
+
+import {
+  ListResponse,
+  LoadPokemonsParams,
+  PokemonResponse,
+} from '../shared/types';
+
 import { Container, Content } from '../styles/pages/pokemons';
-
-export type Pokemon = {
-  id: number;
-  name: string;
-  image: string;
-  types: Array<TypePokemon>;
-};
-
-type ListResponse = {
-  count: number;
-  results: Array<{
-    name: string;
-  }>;
-};
-
-type PokemonResponse = {
-  id: number;
-  name: string;
-  types: Array<{
-    type: {
-      name: TypePokemon;
-    };
-  }>;
-  sprites: {
-    other: {
-      home: {
-        front_default: string;
-      };
-      dream_world: {
-        front_default: string;
-      };
-      'official-artwork': {
-        front_default: string;
-      };
-    };
-  };
-};
-
-type LoadPokemonsParams = {
-  offset: number;
-  limit: number;
-  initial: boolean;
-};
 
 const Pokemons: NextPage = () => {
   const DEFAULT_LIMIT = 81;
@@ -85,7 +50,7 @@ const Pokemons: NextPage = () => {
                 id,
                 name,
                 types: types.map(type => type.type.name),
-                image: sprites.other['dream_world'].front_default,
+                image: sprites.other.dream_world.front_default,
               });
             });
           });

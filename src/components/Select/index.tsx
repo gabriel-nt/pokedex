@@ -1,6 +1,6 @@
 import { Container, ListOptions } from './styles';
 
-import { MdExpandLess, MdExpandMore } from 'react-icons/md';
+import { MdExpandMore } from 'react-icons/md';
 import { useCallback, useState } from 'react';
 
 import Pokeball from '../../../public/pokeball.svg';
@@ -32,7 +32,7 @@ const Select = () => {
       value: 5,
       label: 'Z-A',
     },
-  ];
+  ] as Option[];
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [isActive, setIsActive] = useState(false);

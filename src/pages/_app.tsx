@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 
 import { theme } from '../styles/theme/default';
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -31,6 +31,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </ThemeProvider>
     </>
   );
-}
+};
 
 export default MyApp;

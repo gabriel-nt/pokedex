@@ -20,7 +20,9 @@ const Home: NextPage = () => {
               listagem dos pokémons e suas principais informações.
             </p>
 
-            <Link href="/pokemons">Ver Pokémons</Link>
+            <Link href="/pokemons" prefetch>
+              Ver Pokémons
+            </Link>
           </div>
 
           <div>
