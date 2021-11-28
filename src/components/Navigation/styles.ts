@@ -50,6 +50,7 @@ export const NavigationLink = styled.a<INavigationLinkProps>`
   display: inline-block;
   vertical-align: middle;
   color: #333;
+  cursor: pointer;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
   font-weight: 700;

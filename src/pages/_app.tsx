@@ -4,6 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import type { AppProps } from 'next/app';
 
 import { theme } from '../styles/theme/default';
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -27,7 +29,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </ThemeProvider>
     </>
   );

@@ -4,46 +4,30 @@ import { MdExpandMore } from 'react-icons/md';
 import { useCallback, useState } from 'react';
 
 import Pokeball from '../../../public/pokeball.svg';
-
-type Option = {
-  value: number;
-  label: string;
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../store';
+import { OrderOptions } from '../../store/modules/pokemons/types';
+import { orderPokemons } from '../../store/modules/pokemons/actions';
+import { options } from '../../utils/generations';
 
 const Select = () => {
-  const options = [
-    {
-      value: 1,
-      label: 'Organize results for...',
-    },
-    {
-      value: 2,
-      label: 'Lowest number first',
-    },
-    {
-      value: 3,
-      label: 'Highest number first',
-    },
-    {
-      value: 4,
-      label: 'A-Z',
-    },
-    {
-      value: 5,
-      label: 'Z-A',
-    },
-  ] as Option[];
+  const dispatch = useDispatch();
+  const selectedOption = useSelector<ApplicationState, OrderOptions>(
+    state => state.pokemons.order
+  );
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = useCallback(() => {
     setIsActive(!isActive);
   }, [isActive]);
 
-  const handleSelectedOption = (option: Option) => {
-    setSelectedOption(option);
-  };
+  const handleSelectedOption = useCallback(
+    (option: OrderOptions) => {
+      dispatch(orderPokemons(option));
+    },
+    [dispatch]
+  );
 
   return (
     <Container isActive={isActive} onClick={handleClick}>
@@ -51,8 +35,8 @@ const Select = () => {
       <label>{selectedOption.label}</label>
       <MdExpandMore className="expand-more" />
       <ListOptions isActive={isActive}>
-        {options.map(item => (
-          <li key={item.value} onClick={() => handleSelectedOption(item)}>
+        {options.map((item, index) => (
+          <li key={index} onClick={() => handleSelectedOption(item)}>
             {item.label}
           </li>
         ))}

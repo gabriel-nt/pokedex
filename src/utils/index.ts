@@ -1,4 +1,4 @@
-import { SearchParams, SortParams } from '../shared/types';
+import { FilterParams, SearchParams, SortParams } from '../shared/types';
 
 export const formatId = (id: string | number) => {
   return `#${String(id).padStart(4, '0')}`;
@@ -13,7 +13,7 @@ export const sortPokemonsById = ({ data, order }: SortParams) => {
     return data.sort((a, b) => b.id - a.id);
   }
 
-  return data.sort((a, b) => b.id + a.id);
+  return data.sort((a, b) => b.id - a.id).reverse();
 };
 
 export const sortPokemonsByName = ({ data, order }: SortParams) => {
@@ -22,4 +22,11 @@ export const sortPokemonsByName = ({ data, order }: SortParams) => {
   }
 
   return data.sort((a, b) => a.name.localeCompare(b.name)).reverse();
+};
+
+export const filterPokemonsByGen = ({ data, offset, limit }: FilterParams) => {
+  console.log(data);
+  console.log(offset);
+  console.log(limit);
+  return data.slice(offset, limit);
 };

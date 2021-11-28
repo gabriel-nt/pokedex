@@ -1,4 +1,4 @@
-import { Pokemon } from '../interfaces/Pokemon';
+import { Pokemon } from '../../store/modules/pokemons/types';
 
 export type PokemonTypes =
   | 'bug'
@@ -30,6 +30,12 @@ export type SearchParams = {
   name: string;
 };
 
+export type FilterParams = {
+  data: Pokemon[];
+  offset: number;
+  limit: number;
+};
+
 export type ListResponse = {
   count: number;
   results: Array<{
@@ -50,12 +56,9 @@ export type PokemonResponse = {
       dream_world: {
         front_default: string;
       };
+      'official-artwork': {
+        front_default: string;
+      };
     };
   };
-};
-
-export type LoadPokemonsParams = {
-  offset: number;
-  limit: number;
-  initial: boolean;
 };
