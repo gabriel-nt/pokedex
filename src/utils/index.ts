@@ -25,8 +25,5 @@ export const sortPokemonsByName = ({ data, order }: SortParams) => {
 };
 
 export const filterPokemonsByGen = ({ data, offset, limit }: FilterParams) => {
-  console.log(data);
-  console.log(offset);
-  console.log(limit);
   return data.slice(offset, limit);
 };

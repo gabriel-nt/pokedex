@@ -1,9 +1,12 @@
 import { Reducer } from 'redux';
+
 import {
   filterPokemonsByGen,
+  searchPokemonsByName,
   sortPokemonsById,
   sortPokemonsByName,
 } from '../../../utils';
+
 import {
   ActionTypes,
   FilterOptions,
@@ -16,6 +19,7 @@ const INITIAL_STATE: PokemonsState = {
   currentPokemons: [],
   error: false,
   loaded: false,
+  searchValue: '',
   filter: {
     text: 'I',
     offset: 0,
@@ -83,30 +87,30 @@ const reducer: Reducer<PokemonsState> = (state = INITIAL_STATE, action) => {
         filter,
         currentPokemons: [...data],
       };
+    case ActionTypes.SEARCH_POKEMONS:
+      if (action.searchValue === '') {
+        const data = filterPokemonsByGen({
+          data: state.allPokemons,
+          limit: state.filter.limit,
+          offset: state.filter.offset,
+        });
 
-    // if (currentOrder.type === 'name') {
-    //   return {
-    //     ...state,
-    //     filter,
-    //     currentPokemons: [
-    //       ...sortPokemonsByName({
-    //         order: currentOrder.order,
-    //         data: data,
-    //       }),
-    //     ],
-    //   };
-    // }
+        return {
+          ...state,
+          currentPokemons: [...data],
+        };
+      }
 
-    // return {
-    //   ...state,
-    //   filter,
-    //   currentPokemons: [
-    //     ...sortPokemonsById({
-    //       order: currentOrder.order,
-    //       data: data,
-    //     }),
-    //   ],
-    // }
+      return {
+        ...state,
+        currentPokemons: [
+          ...searchPokemonsByName({
+            data: state.allPokemons,
+            name: action.searchValue,
+          }),
+        ],
+        searchValue: action.searchValue,
+      };
     default:
       return state;
   }

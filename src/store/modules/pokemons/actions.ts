@@ -43,3 +43,10 @@ export function filterPokemons(filter: FilterOptions) {
     filter,
   };
 }
+
+export function searchPokemons(searchValue: string) {
+  return {
+    type: ActionTypes.SEARCH_POKEMONS,
+    searchValue,
+  };
+}

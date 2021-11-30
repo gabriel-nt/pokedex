@@ -6,6 +6,7 @@ export enum ActionTypes {
   LOAD_FAILURE = '@pokemons/LOAD_FAILURE',
   ORDER_POKEMONS = '@pokemons/ORDER_POKEMONS',
   FILTER_POKEMONS = '@pokemons/FILTER_POKEMONS',
+  SEARCH_POKEMONS = '@pokemons/SEARCH_POKEMONS',
 }
 
 export interface Pokemon {
@@ -19,6 +20,7 @@ export interface PokemonsState {
   readonly error: boolean;
   readonly loaded: boolean;
   readonly order: OrderOptions;
+  readonly searchValue: string;
   readonly filter: FilterOptions;
   readonly allPokemons: Pokemon[];
   readonly currentPokemons: Pokemon[];

@@ -42,7 +42,7 @@ const Pokemons: NextPage = () => {
     dispatch(
       loadRequest({
         initial: false,
-        limit: 1500,
+        limit: 898,
         offset: 81,
       })
     );

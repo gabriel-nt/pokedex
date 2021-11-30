@@ -39,7 +39,7 @@ const generations = [
   {
     text: 'VIII',
     offset: 809,
-    limit: 1200,
+    limit: 898,
   },
 ];
 

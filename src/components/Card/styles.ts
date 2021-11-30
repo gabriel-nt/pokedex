@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { TypePokemon } from '../../@types';
+import { PokemonTypes } from '../../shared/types';
 
 interface IContainerProps {
-  type: TypePokemon;
+  type: PokemonTypes;
 }
 
 export const Container = styled.div<IContainerProps>`
@@ -29,6 +29,8 @@ export const Container = styled.div<IContainerProps>`
     font-size: 2rem;
     margin-top: 8px;
     margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
     text-transform: capitalize;
     color: ${({ theme }) => theme.colors.white};
   }
