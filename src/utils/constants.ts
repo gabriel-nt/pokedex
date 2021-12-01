@@ -1,6 +1,8 @@
 import { OrderOptions } from '../store/modules/pokemons/types';
 
-const generations = [
+export const STORAGE_POKEMONS = '@pokemons/STORAGE_POKEMONS';
+
+export const generations = [
   {
     text: 'I',
     offset: 0,
@@ -43,7 +45,7 @@ const generations = [
   },
 ];
 
-const options = [
+export const options = [
   {
     type: 'number',
     order: 'asc',
@@ -70,5 +72,3 @@ const options = [
     label: 'Z-A',
   },
 ] as OrderOptions[];
-
-export { generations, options };

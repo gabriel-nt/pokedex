@@ -10,8 +10,11 @@ import { Navigation } from '../components/Navigation';
 
 import { Container, Content } from '../styles/pages/pokemons';
 import { ApplicationState } from '../store';
-import { loadRequest } from '../store/modules/pokemons/actions';
+import { loadRequest, loadSuccess } from '../store/modules/pokemons/actions';
 import { Pokemon } from '../store/modules/pokemons/types';
+import { generations, STORAGE_POKEMONS } from '../utils/constants';
+import { filterPokemonsByGen } from '../utils';
+import { NoSearchResults } from '../components/NoSearchResults';
 
 const Pokemons: NextPage = () => {
   const DEFAULT_LIMIT = 81;
@@ -22,30 +25,60 @@ const Pokemons: NextPage = () => {
     state => state.pokemons.currentPokemons
   );
 
-  const allPokemons = useSelector<ApplicationState, Pokemon[]>(
-    state => state.pokemons.allPokemons
-  );
-
   const loaded = useSelector<ApplicationState, boolean>(
     state => state.pokemons.loaded
   );
 
   useEffect(() => {
-    dispatch(
-      loadRequest({
-        initial: true,
-        limit: DEFAULT_LIMIT,
-        offset: 0,
-      })
-    );
+    try {
+      var allPokemons = localStorage.getItem(STORAGE_POKEMONS);
 
-    dispatch(
-      loadRequest({
-        initial: false,
-        limit: 898,
-        offset: 81,
-      })
-    );
+      if (!allPokemons) {
+        throw new Error('Empty list');
+      }
+
+      if (allPokemons) {
+        var pokemons = JSON.parse(allPokemons) as Pokemon[];
+
+        dispatch(
+          loadSuccess(
+            filterPokemonsByGen({
+              data: pokemons,
+              offset: generations[0].offset,
+              limit: generations[0].limit,
+            }),
+            true
+          )
+        );
+
+        dispatch(
+          loadSuccess(
+            filterPokemonsByGen({
+              data: pokemons,
+              offset: generations[0].limit,
+              limit: pokemons.length,
+            }),
+            false
+          )
+        );
+      }
+    } catch (e) {
+      dispatch(
+        loadRequest({
+          initial: true,
+          limit: DEFAULT_LIMIT,
+          offset: 0,
+        })
+      );
+
+      dispatch(
+        loadRequest({
+          initial: false,
+          offset: DEFAULT_OFFSET,
+          limit: 817,
+        })
+      );
+    }
   }, [dispatch]);
 
   return (
@@ -55,11 +88,17 @@ const Pokemons: NextPage = () => {
       {!loaded ? (
         <Loader />
       ) : (
-        <Content>
-          {pokemons.map(pokemon => (
-            <Card key={pokemon.id} data={pokemon} />
-          ))}
-        </Content>
+        <>
+          {pokemons.length === 0 ? (
+            <NoSearchResults />
+          ) : (
+            <Content>
+              {pokemons.map(pokemon => (
+                <Card key={pokemon.id} data={pokemon} />
+              ))}
+            </Content>
+          )}
+        </>
       )}
     </Container>
   );

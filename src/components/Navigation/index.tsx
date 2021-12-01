@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Select } from '../Select';
-import { generations } from '../../utils/generations';
+import { generations } from '../../utils/constants';
 
 import { Container, NavigationContainer, NavigationLink } from './styles';
 import { useDispatch, useSelector } from 'react-redux';

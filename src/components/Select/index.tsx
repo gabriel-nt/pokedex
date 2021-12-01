@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
 import { OrderOptions } from '../../store/modules/pokemons/types';
 import { orderPokemons } from '../../store/modules/pokemons/actions';
-import { options } from '../../utils/generations';
+import { options } from '../../utils/constants';
 
 const Select = () => {
   const dispatch = useDispatch();
