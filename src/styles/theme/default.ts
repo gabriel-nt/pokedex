@@ -1,8 +1,8 @@
 const theme = {
   title: 'default',
   backgrounds: {
-    bug: '#C3CE75',
     dark: '#333',
+    bug: '#C3CE75',
     dragon: '#F9BE00',
     electric: '#FFD86F',
     fairy: '#f469a9',
@@ -22,24 +22,6 @@ const theme = {
   },
   colors: {
     white: '#ffffff',
-    bug: '#8cb230',
-    dark: '#58575f',
-    dragon: '#0f6ac0',
-    electric: '#eed535',
-    fairy: '#ed6ec7',
-    fighting: '#d04164',
-    fire: '#fd7d24',
-    flying: '#748fc9',
-    ghost: '#556aae',
-    grass: '#62b957',
-    ground: '#dd7748',
-    ice: '#61cec0',
-    normal: '#9da0aa',
-    poison: '#a552cc',
-    psychic: '#ea5d60',
-    rock: '#baab82',
-    steel: '#417d9a',
-    water: '#4a90da',
   },
 };
 

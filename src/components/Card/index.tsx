@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
-import { badges } from '../../assets/badges';
-
 import { formatId } from '../../utils';
-import { Pokemon } from '../../shared/interfaces/Pokemon';
+import { badges } from '../../assets/badges';
+import { Pokemon } from '../../store/modules/pokemons/types';
 
 import { BadgeContainer, Container, ImageContainer, Pokeball } from './styles';
 

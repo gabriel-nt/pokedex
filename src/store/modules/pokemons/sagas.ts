@@ -2,10 +2,11 @@ import { AxiosResponse } from 'axios';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import { api } from '../../../services/api';
-import { ActionTypes, LoadPokemons, Pokemon } from './types';
+
 import { loadFailure, loadSuccess } from './actions';
-import { ListResponse, PokemonResponse } from '../../../shared/types';
 import { STORAGE_POKEMONS } from '../../../utils/constants';
+import { ActionTypes, LoadPokemons, Pokemon } from './types';
+import { ListResponse, PokemonResponse } from '../../../shared/types';
 
 type Params = LoadPokemons & { type: string };
 

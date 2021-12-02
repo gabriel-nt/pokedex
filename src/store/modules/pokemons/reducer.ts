@@ -7,8 +7,6 @@ import {
   sortPokemonsByName,
 } from '../../../utils';
 
-import { STORAGE_POKEMONS } from '../../../utils/constants';
-
 import {
   ActionTypes,
   FilterOptions,
@@ -39,13 +37,9 @@ const reducer: Reducer<PokemonsState> = (state = INITIAL_STATE, action) => {
     case ActionTypes.LOAD_REQUEST:
       return { ...state, loaded: false };
     case ActionTypes.LOAD_SUCCCES:
-      console.log(action);
-
       if (action.initial) {
         return { ...state, loaded: true, currentPokemons: action.payload };
       }
-
-      console.log([...state.currentPokemons, ...action.payload]);
 
       return {
         ...state,

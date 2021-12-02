@@ -1,14 +1,15 @@
-import { Container, ListOptions } from './styles';
-
-import { MdExpandMore } from 'react-icons/md';
 import { useCallback, useState } from 'react';
-
-import Pokeball from '../../../public/pokeball.svg';
+import { MdExpandMore } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { options } from '../../utils/constants';
+import Pokeball from '../../../public/pokeball.svg';
+
 import { ApplicationState } from '../../store';
 import { OrderOptions } from '../../store/modules/pokemons/types';
 import { orderPokemons } from '../../store/modules/pokemons/actions';
-import { options } from '../../utils/constants';
+
+import { Container, ListOptions } from './styles';
 
 const Select = () => {
   const dispatch = useDispatch();

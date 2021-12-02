@@ -1,20 +1,21 @@
+import { useEffect } from 'react';
 import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { api } from '../services/api';
 import { Card } from '../components/Card';
 import { Header } from '../components/Header';
 import { Loader } from '../components/Loader';
 import { Navigation } from '../components/Navigation';
+import { NoSearchResults } from '../components/NoSearchResults';
+
+import { ApplicationState } from '../store';
+import { Pokemon } from '../store/modules/pokemons/types';
+import { loadRequest, loadSuccess } from '../store/modules/pokemons/actions';
+
+import { filterPokemonsByGen } from '../utils';
+import { generations, STORAGE_POKEMONS } from '../utils/constants';
 
 import { Container, Content } from '../styles/pages/pokemons';
-import { ApplicationState } from '../store';
-import { loadRequest, loadSuccess } from '../store/modules/pokemons/actions';
-import { Pokemon } from '../store/modules/pokemons/types';
-import { generations, STORAGE_POKEMONS } from '../utils/constants';
-import { filterPokemonsByGen } from '../utils';
-import { NoSearchResults } from '../components/NoSearchResults';
 
 const Pokemons: NextPage = () => {
   const DEFAULT_LIMIT = 81;
@@ -83,7 +84,7 @@ const Pokemons: NextPage = () => {
 
   return (
     <Container>
-      <Header showSearch={false} />
+      <Header showSearch={true} />
       <Navigation />
       {!loaded ? (
         <Loader />

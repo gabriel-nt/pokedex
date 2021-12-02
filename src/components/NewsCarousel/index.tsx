@@ -57,7 +57,7 @@ const NewsCarousel = () => {
 
       <Pagination>
         <BsArrowLeftShort className="prev-slider" />
-        <span>1 de 4</span>
+        <span>1 OF 4</span>
         <BsArrowRightShort className="next-slider" />
       </Pagination>
     </Container>

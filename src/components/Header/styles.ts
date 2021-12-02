@@ -66,10 +66,14 @@ export const MenuContainer = styled.div<IMenuContainerProps>`
   justify-content: center;
   align-items: center;
 
+  > div {
+    display: ${({ showSearch }) => (showSearch ? 'block' : 'none')};
+  }
+
   > svg {
     font-size: 1.5rem;
     margin-left: 60px;
-    color: ${({ showSearch }) => (showSearch ? '#fff' : '#333')};
+    color: ${({ showSearch }) => (showSearch ? '#333' : '#fff')};
   }
 
   @media (max-width: 516px) {
@@ -78,6 +82,7 @@ export const MenuContainer = styled.div<IMenuContainerProps>`
 
     > svg {
       margin-left: 24px;
+      display: ${({ showSearch }) => (showSearch ? 'block' : 'none')};
     }
   }
 `;

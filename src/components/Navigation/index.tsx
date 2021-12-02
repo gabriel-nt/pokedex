@@ -1,20 +1,21 @@
-import Link from 'next/link';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Select } from '../Select';
+import { ApplicationState } from '../../store';
 import { generations } from '../../utils/constants';
 
-import { Container, NavigationContainer, NavigationLink } from './styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { ApplicationState } from '../../store';
 import {
   FilterOptions,
   OrderOptions,
 } from '../../store/modules/pokemons/types';
-import { useCallback } from 'react';
+
 import {
   filterPokemons,
   orderPokemons,
 } from '../../store/modules/pokemons/actions';
+
+import { Container, NavigationContainer, NavigationLink } from './styles';
 
 const Navigation = () => {
   const dispatch = useDispatch();

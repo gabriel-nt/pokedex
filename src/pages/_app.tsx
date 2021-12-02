@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import GlobalStyle from '../styles/global';
-import { ThemeProvider } from 'styled-components';
-import type { AppProps } from 'next/app';
-
-import { theme } from '../styles/theme/default';
 import { Provider } from 'react-redux';
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'styled-components';
+
 import { store } from '../store';
+import GlobalStyle from '../styles/global';
+import { theme } from '../styles/theme/default';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

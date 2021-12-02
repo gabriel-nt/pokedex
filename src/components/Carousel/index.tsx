@@ -1,4 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import SwiperCore, {
   Autoplay,
   Pagination,

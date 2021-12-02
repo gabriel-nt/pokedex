@@ -19,15 +19,15 @@ export const Content = styled.section`
   z-index: 2;
   grid-template-columns: 1fr;
 
+  @media (max-width: 500px) {
+    padding: 1rem;
+  }
+
   @media (min-width: 902px) {
     grid-template-columns: 1fr 1fr;
   }
 
   @media (min-width: 1305px) {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media (max-width: 500px) {
-    padding: 1rem;
   }
 `;

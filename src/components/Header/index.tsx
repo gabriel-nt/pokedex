@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { KeyboardEvent, useCallback, useRef } from 'react';
 import { AiOutlineSearch, AiOutlineMenu } from 'react-icons/ai';
@@ -26,6 +27,7 @@ type HeaderProps = {
 };
 
 const Header = ({ showSearch = true }: HeaderProps) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -37,21 +39,35 @@ const Header = ({ showSearch = true }: HeaderProps) => {
     (e: KeyboardEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
       if (target.value === '' || e.key === 'Enter') {
-        dispatch(searchPokemons(target.value));
-        dispatch(orderPokemons(currentOrder));
+        if (router.asPath === '/' && target.value !== '') {
+          router.push({
+            pathname: '/pokemons',
+            query: { searchValue: target.value },
+          });
+        } else {
+          dispatch(searchPokemons(target.value));
+          dispatch(orderPokemons(currentOrder));
+        }
       }
     },
-    [dispatch, currentOrder]
+    [dispatch, currentOrder, router]
   );
 
   const handleClickEvent = useCallback(() => {
     const value = inputRef.current?.value;
 
     if (value) {
-      dispatch(searchPokemons(value));
-      dispatch(orderPokemons(currentOrder));
+      if (router.asPath === '/') {
+        router.push({
+          pathname: '/pokemons',
+          query: { searchValue: value },
+        });
+      } else {
+        dispatch(searchPokemons(value));
+        dispatch(orderPokemons(currentOrder));
+      }
     }
-  }, [dispatch, currentOrder]);
+  }, [dispatch, currentOrder, router]);
 
   return (
     <Container>
