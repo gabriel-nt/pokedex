@@ -67,7 +67,7 @@ export const MenuContainer = styled.div<IMenuContainerProps>`
   align-items: center;
 
   > div {
-    display: ${({ showSearch }) => (showSearch ? 'block' : 'none')};
+    display: ${({ showSearch }) => (showSearch ? 'flex' : 'none')};
   }
 
   > svg {
