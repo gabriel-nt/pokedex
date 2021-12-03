@@ -16,6 +16,7 @@ import { filterPokemonsByGen } from '../utils';
 import { generations, STORAGE_POKEMONS } from '../utils/constants';
 
 import { Container, Content } from '../styles/pages/pokemons';
+import { Modal } from '../components/Modal';
 
 const Pokemons: NextPage = () => {
   const DEFAULT_LIMIT = 81;
@@ -97,6 +98,7 @@ const Pokemons: NextPage = () => {
               {pokemons.map(pokemon => (
                 <Card key={pokemon.id} data={pokemon} />
               ))}
+              <Modal data={pokemons[0]} />
             </Content>
           )}
         </>

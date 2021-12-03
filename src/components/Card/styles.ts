@@ -11,6 +11,7 @@ export const Container = styled.div<IContainerProps>`
   box-shadow: 0 0 20px 0 ${({ theme, type }) => theme.backgrounds[type]};
   position: relative;
   margin: 32px 20px;
+  cursor: pointer;
   transition: all 0.8s ease;
 
   border-radius: 12px;
