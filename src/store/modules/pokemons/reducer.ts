@@ -6,6 +6,7 @@ import {
   sortPokemonsById,
   sortPokemonsByName,
 } from '../../../utils';
+import { selectPokemon } from './actions';
 
 import {
   ActionTypes,
@@ -20,6 +21,8 @@ const INITIAL_STATE: PokemonsState = {
   error: false,
   loaded: false,
   searchValue: '',
+  showModal: false,
+  selectedPokemon: undefined,
   filter: {
     text: 'I',
     offset: 0,
@@ -110,6 +113,17 @@ const reducer: Reducer<PokemonsState> = (state = INITIAL_STATE, action) => {
           }),
         ],
         searchValue: action.searchValue,
+      };
+    case ActionTypes.SELECT_POKEMON:
+      return {
+        ...state,
+        showModal: true,
+        selectedPokemon: action.payload,
+      };
+    case ActionTypes.CLOSE_MODAL:
+      return {
+        ...state,
+        showModal: false,
       };
     default:
       return state;

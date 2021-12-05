@@ -1,6 +1,16 @@
 import styled from 'styled-components';
+import { PokemonTypes } from '../../shared/types';
 
-export const Container = styled.div`
+interface IContainerProps {
+  active: boolean;
+  type: PokemonTypes;
+}
+
+interface IOverlayProps {
+  active: boolean;
+}
+
+export const Container = styled.div<IContainerProps>`
   z-index: 101;
   color: white;
   max-height: 100vh;
@@ -10,21 +20,13 @@ export const Container = styled.div`
   top: 50%;
   min-height: 400px;
   transform: translate(-50%, -50%);
-  position: absolute;
-  background-color: #48d0b0;
+  position: fixed;
+  opacity: ${({ active }) => (active ? 1 : 0)};
+  visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
+  background-color: ${({ theme, type }) => theme.backgrounds[type]};
+  transition: opacity 0.2s ease-in, visibility 0.2s ease-in;
   border-radius: 12px;
   overflow: hidden;
-
-  .info {
-    color: #333;
-    position: absolute;
-    padding: 20px;
-    padding-top: 30px;
-    bottom: 0;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 0 7px 0 rgb(0 0 0 / 40%);
-  }
 `;
 
 export const ModalHeader = styled.div`
@@ -48,6 +50,7 @@ export const ModalHeader = styled.div`
   svg {
     width: 30px;
     height: 30px;
+    cursor: pointer;
   }
 `;
 
@@ -80,14 +83,15 @@ export const ImageContainer = styled.div`
   z-index: 1000;
 `;
 
-export const Overlay = styled.div`
+export const Overlay = styled.div<IOverlayProps>`
   position: fixed;
   bottom: 0;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 100;
+  opacity: ${({ active }) => (active ? 1 : 0)};
   transition: all 0.3s;
+  z-index: 100;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 

@@ -50,3 +50,17 @@ export function searchPokemons(searchValue: string) {
     searchValue,
   };
 }
+
+export function selectPokemon(payload: Pokemon | undefined) {
+  return {
+    type: ActionTypes.SELECT_POKEMON,
+    payload,
+  };
+}
+
+export function closeModal(payload: boolean) {
+  return {
+    type: ActionTypes.CLOSE_MODAL,
+    payload,
+  };
+}

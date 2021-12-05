@@ -31,6 +31,10 @@ const Pokemons: NextPage = () => {
     state => state.pokemons.loaded
   );
 
+  const selectedPokemon = useSelector<ApplicationState, Pokemon | undefined>(
+    state => state.pokemons.selectedPokemon
+  );
+
   useEffect(() => {
     try {
       var allPokemons = localStorage.getItem(STORAGE_POKEMONS);
@@ -98,7 +102,7 @@ const Pokemons: NextPage = () => {
               {pokemons.map(pokemon => (
                 <Card key={pokemon.id} data={pokemon} />
               ))}
-              <Modal data={pokemons[0]} />
+              {selectedPokemon && <Modal data={selectedPokemon} />}
             </Content>
           )}
         </>

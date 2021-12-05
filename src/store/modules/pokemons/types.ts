@@ -7,6 +7,8 @@ export enum ActionTypes {
   ORDER_POKEMONS = '@pokemons/ORDER_POKEMONS',
   FILTER_POKEMONS = '@pokemons/FILTER_POKEMONS',
   SEARCH_POKEMONS = '@pokemons/SEARCH_POKEMONS',
+  SELECT_POKEMON = '@pokemons/SELECT_POKEMON',
+  CLOSE_MODAL = '@pokemons/CLOSE_MODAL',
 }
 
 export interface Pokemon {
@@ -19,11 +21,13 @@ export interface Pokemon {
 export interface PokemonsState {
   readonly error: boolean;
   readonly loaded: boolean;
+  readonly showModal: boolean;
   readonly order: OrderOptions;
   readonly searchValue: string;
   readonly filter: FilterOptions;
   readonly allPokemons: Pokemon[];
   readonly currentPokemons: Pokemon[];
+  readonly selectedPokemon: Pokemon | undefined;
 }
 
 export type LoadPokemons = {

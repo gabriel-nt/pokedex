@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import { formatId } from '../../utils';
 import {
@@ -15,56 +15,74 @@ import { Pokemon } from '../../store/modules/pokemons/types';
 
 import { badges } from '../../assets/badges';
 
+import { ModalDetails } from './ModalDetails';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../store';
+import { useCallback } from 'react';
+import {
+  closeModal,
+  selectPokemon,
+} from '../../store/modules/pokemons/actions';
+
 interface ModalProps {
   data: Pokemon;
 }
 
-const Modal = ({ data }: ModalProps) => (
-  <>
-    <Container>
-      <ModalHeader>
-        <AiOutlineArrowLeft />
+const Modal = ({ data }: ModalProps) => {
+  const dispatch = useDispatch();
 
-        <p>{formatId(data.id)}</p>
-      </ModalHeader>
+  const showModal = useSelector<ApplicationState, boolean>(
+    state => state.pokemons.showModal
+  );
 
-      <ModalContent>
-        <h1>{data.name}</h1>
-        <div className="badges">
-          {data.types.map(type => (
-            <div key={type}>
-              <Image src={badges[type]} layout="fixed" alt={type} />
-            </div>
-          ))}
-        </div>
+  const handleCloseModal = useCallback(() => {
+    dispatch(closeModal(false));
 
-        <Pokeball />
+    setTimeout(() => {
+      dispatch(selectPokemon(undefined));
+    }, 200);
+  }, [dispatch]);
 
-        <ImageContainer className="img-container">
-          {data.image && (
-            <Image
-              layout="fixed"
-              width={160}
-              height={160}
-              src={data.image}
-              alt={data.name}
-              placeholder="empty"
-            />
-          )}
-        </ImageContainer>
-      </ModalContent>
+  return (
+    <>
+      <Container active={showModal} type={data.types[0]}>
+        <ModalHeader>
+          <FiArrowLeft onClick={handleCloseModal} />
 
-      <div className="info">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-          eaque fugiat corrupti, quisquam, odit sequi cupiditate quis beatae,
-          quia repellat odio? Animi harum accusantium, vel placeat illum quas id
-          mollitia.
-        </p>
-      </div>
-    </Container>
-    <Overlay />
-  </>
-);
+          <p>{formatId(data.id)}</p>
+        </ModalHeader>
+
+        <ModalContent>
+          <h1>{data.name}</h1>
+          <div className="badges">
+            {data.types.map(type => (
+              <div key={type}>
+                <Image src={badges[type]} layout="fixed" alt={type} />
+              </div>
+            ))}
+          </div>
+
+          <Pokeball />
+
+          <ImageContainer className="img-container">
+            {data.image && (
+              <Image
+                layout="fixed"
+                width={160}
+                height={160}
+                src={data.image}
+                alt={data.name}
+                placeholder="empty"
+              />
+            )}
+          </ImageContainer>
+        </ModalContent>
+
+        <ModalDetails data={data} />
+      </Container>
+      <Overlay active={showModal} onClick={handleCloseModal} />
+    </>
+  );
+};
 
 export { Modal };
