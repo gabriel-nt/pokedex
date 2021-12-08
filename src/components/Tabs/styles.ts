@@ -1,19 +1,14 @@
 import styled from 'styled-components';
-import { PokemonTypes } from '../../../shared/types';
-
-interface IContainerProps {
-  type: PokemonTypes;
-}
+import { PokemonTypes } from '../../shared/types';
 
 interface ITabItemProps {
   active?: boolean;
   type: PokemonTypes;
 }
 
-export const Container = styled.div<IContainerProps>`
+export const Container = styled.div`
   color: #333;
   padding: 20px;
-  padding-top: 30px;
   bottom: 0;
   background-color: white;
   border-radius: 12px;
@@ -41,27 +36,6 @@ export const Container = styled.div<IContainerProps>`
         display: flex;
         align-items: center;
         font-weight: bold;
-      }
-
-      .range {
-        width: 100%;
-        position: relative;
-        height: 5px;
-        margin-left: 10px;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: rgba(0, 0, 0, 0.05);
-
-        &:after {
-          content: '';
-          border-radius: 10px;
-          animation: fill 0.6s backwards;
-          position: absolute;
-          bottom: 0;
-          height: 4px;
-          width: 60%;
-          background-color: ${({ theme, type }) => theme.backgrounds[type]};
-        }
       }
     }
   }
@@ -93,6 +67,7 @@ export const TabItem = styled.span<ITabItemProps>`
     left: 0;
     position: absolute;
     bottom: -2px;
+    transition: all 0.3s;
     background-color: ${({ theme, active, type }) =>
       active && theme.backgrounds[type]};
   }
