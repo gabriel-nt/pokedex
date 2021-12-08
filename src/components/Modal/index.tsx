@@ -15,6 +15,7 @@ import { Pokemon } from '../../store/modules/pokemons/types';
 
 import { badges } from '../../assets/badges';
 
+import { ModalDetails } from './ModalDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../store';
 import { useCallback } from 'react';
@@ -22,7 +23,6 @@ import {
   closeModal,
   selectPokemon,
 } from '../../store/modules/pokemons/actions';
-import { Tabs } from '../Tabs';
 
 interface ModalProps {
   data: Pokemon;
@@ -68,8 +68,8 @@ const Modal = ({ data }: ModalProps) => {
             {data.image && (
               <Image
                 layout="fixed"
-                width={180}
-                height={180}
+                width={160}
+                height={160}
                 src={data.image}
                 alt={data.name}
                 placeholder="empty"
@@ -78,7 +78,7 @@ const Modal = ({ data }: ModalProps) => {
           </ImageContainer>
         </ModalContent>
 
-        <Tabs data={data} />
+        <ModalDetails data={data} />
       </Container>
       <Overlay active={showModal} onClick={handleCloseModal} />
     </>

@@ -38,12 +38,6 @@ function* loadPokemons({ initial, offset, limit }: Params) {
     const pokemonsList = arrayGenerators.map(item => ({
       id: item.data.id,
       name: item.data.name,
-      about: {
-        height: item.data.height,
-        weight: item.data.weight,
-        abilities: item.data.abilities.map(ability => ability.ability.name),
-      },
-      stats: item.data.stats.map(stat => stat.base_stat),
       types: item.data.types.map(type => type.type.name),
       image: item.data.sprites.other.dream_world.front_default
         ? item.data.sprites.other.dream_world.front_default

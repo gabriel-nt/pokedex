@@ -16,12 +16,6 @@ export interface Pokemon {
   name: string;
   image: string;
   types: Array<PokemonTypes>;
-  about: {
-    height: number;
-    weight: number;
-    abilities: Array<string>;
-  };
-  stats: Array<number>;
 }
 
 export interface PokemonsState {

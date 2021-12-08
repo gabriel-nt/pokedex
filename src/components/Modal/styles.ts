@@ -24,7 +24,7 @@ export const Container = styled.div<IContainerProps>`
   opacity: ${({ active }) => (active ? 1 : 0)};
   visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
   background-color: ${({ theme, type }) => theme.backgrounds[type]};
-  transition: all 0.2s ease-in;
+  transition: opacity 0.2s ease-in, visibility 0.2s ease-in;
   border-radius: 12px;
   overflow: hidden;
 `;
@@ -81,7 +81,6 @@ export const ImageContainer = styled.div`
   transition: top 0.8s ease;
   margin-top: 12px;
   z-index: 1000;
-  height: 150px;
 `;
 
 export const Overlay = styled.div<IOverlayProps>`
@@ -101,8 +100,8 @@ export const Pokeball = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  right: -32px;
-  bottom: 65px;
+  right: -12px;
+  bottom: 10px;
   font-size: 10px;
   height: 100%;
   overflow: hidden;

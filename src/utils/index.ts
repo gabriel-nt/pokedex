@@ -4,14 +4,6 @@ export const formatId = (id: string | number) => {
   return `#${String(id).padStart(4, '0')}`;
 };
 
-export const formatHeight = (height: number) => {
-  return `${String(height * 10)}cm`;
-};
-
-export const formatWeight = (weight: number) => {
-  return `${String(weight / 10)}kg`;
-};
-
 export const searchPokemonsByName = ({ data, name }: SearchParams) => {
   return data.filter(item => item.name.indexOf(name) !== -1);
 };

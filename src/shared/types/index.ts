@@ -51,16 +51,6 @@ export type PokemonResponse = {
       name: PokemonTypes;
     };
   }>;
-  height: number;
-  weight: number;
-  abilities: Array<{
-    ability: {
-      name: string;
-    };
-  }>;
-  stats: Array<{
-    base_stat: number;
-  }>;
   sprites: {
     other: {
       dream_world: {
