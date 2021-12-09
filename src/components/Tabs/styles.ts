@@ -55,7 +55,7 @@ export const TabItem = styled.span<ITabItemProps>`
   font-family: inherit;
   padding: 1rem;
   position: relative;
-  color: ${({ theme, active }) => (active ? '#333' : 'rgba(0, 0, 0, 0.2)')};
+  color: ${({ active }) => (active ? '#333' : 'rgba(0, 0, 0, 0.2)')};
   outline: none;
   transition: all 0.3s;
   cursor: pointer;
