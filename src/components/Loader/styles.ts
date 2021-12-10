@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface IContainerProps {
+  alignCenter: boolean;
+}
+
+export const Container = styled.div<IContainerProps>`
   font-size: 1.2rem;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 29vh 0;
+  padding: ${({ alignCenter }) => (alignCenter ? '29vh 0' : '6vh 0')};
   color: #333;
   flex-direction: column;
   font-family: 'Roboto';

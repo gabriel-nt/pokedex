@@ -8,15 +8,14 @@ export const Container = styled.div`
   flex-direction: column;
 
   > div {
+    width: 100%;
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
     .pokemon {
       display: flex;
-      flex-basis: 40%;
-      padding: 4px 24px;
+      padding: 4px 40px;
       align-items: center;
       flex-direction: column;
 
@@ -26,7 +25,22 @@ export const Container = styled.div`
         padding-top: 8px;
         text-transform: capitalize;
         cursor: pointer;
-        margin-bottom: 8px;
+        margin: 12px 0 16px 0;
+      }
+    }
+
+    .level {
+      text-align: center;
+
+      svg {
+        color: #ccc;
+        font-size: 2rem;
+      }
+
+      p {
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: capitalize;
       }
     }
   }

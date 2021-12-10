@@ -14,7 +14,7 @@ export const Container = styled.div<IContainerProps>`
   z-index: 101;
   color: white;
   max-height: 100vh;
-  max-width: 800px;
+  max-width: 480px;
   min-width: 460px;
   left: 50%;
   top: 50%;

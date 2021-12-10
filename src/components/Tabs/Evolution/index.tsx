@@ -2,16 +2,18 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { api } from '../../../services/api';
+import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { getImageByPokemonName } from '../../../utils';
 
 import { Container, Pokeball, ImageContainer } from './styles';
+import { Loader } from '../../Loader';
 
 interface EvolutionProps {
   id: number;
 }
 
 type Evolutions = {
-  minLevel: number;
+  minLevel: string | number;
   pokemons: Array<{
     name: string;
     image: string | undefined;
@@ -21,6 +23,13 @@ type Evolutions = {
 type EnvolvesTo = {
   evolution_details: Array<{
     min_level: number;
+    min_happiness: number;
+    item: {
+      name: string;
+    };
+    trigger: {
+      name: string;
+    };
   }>;
   species: {
     name: string;
@@ -65,52 +74,82 @@ const Evolution = ({ id }: EvolutionProps) => {
           image: getImageByPokemonName(evolvesTo01.species.name),
         };
 
-        const pokemonN3 = {
-          name: evolvesTo02[0].species.name,
-          image: getImageByPokemonName(evolvesTo02[0].species.name),
-        };
-
         tempArray.push({
           pokemons: [pokemonN1, pokemonN2],
-          minLevel: evolvesTo01.evolution_details[0].min_level,
+          minLevel:
+            (evolvesTo01.evolution_details[0].min_level &&
+              `Lvl ${evolvesTo01.evolution_details[0].min_level}`) ??
+            (evolvesTo01.evolution_details[0].min_happiness &&
+              `Lvl ${evolvesTo01.evolution_details[0].min_happiness}`) ??
+            `Use ${evolvesTo01.evolution_details[0].item.name}`,
         });
 
-        tempArray.push({
-          pokemons: [pokemonN2, pokemonN3],
-          minLevel: evolvesTo02[0].evolution_details[0].min_level,
-        });
+        if (evolvesTo02.length > 0) {
+          const pokemonN3 = {
+            name: evolvesTo02[0].species.name,
+            image: getImageByPokemonName(evolvesTo02[0].species.name),
+          };
 
-        setEvolutions([...tempArray]);
+          tempArray.push({
+            pokemons: [pokemonN2, pokemonN3],
+            minLevel:
+              (evolvesTo02[0].evolution_details[0].min_level &&
+                `Lvl ${evolvesTo02[0].evolution_details[0].min_level}`) ??
+              (evolvesTo02[0].evolution_details[0].min_happiness &&
+                `Lvl ${evolvesTo02[0].evolution_details[0].min_happiness}`) ??
+              `Use ${evolvesTo02[0].evolution_details[0].item.name}`,
+          });
+        }
       }
+
+      setLoaded(true);
+      setEvolutions([...tempArray]);
     }
 
-    loadEvolution();
+    setTimeout(() => {
+      loadEvolution();
+    }, 1000);
   }, [id]);
 
   return (
     <Container>
-      {evolutions.map(item => (
-        <div key={item.minLevel}>
-          {item.pokemons.map((pokemon, index) => (
-            <div className="pokemon" key={index}>
-              {pokemon.image && (
-                <ImageContainer>
-                  <Pokeball />
-                  <Image
-                    layout="fixed"
-                    width={80}
-                    height={80}
-                    src={pokemon.image}
-                    alt={pokemon.name}
-                    placeholder="empty"
-                  />
-                </ImageContainer>
-              )}
-              <p>{pokemon.name}</p>
+      {!loaded ? (
+        <Loader alignCenter={false} />
+      ) : (
+        <>
+          {evolutions.map(item => (
+            <div key={item.minLevel}>
+              {item.pokemons.map((pokemon, index) => (
+                <>
+                  <div className="pokemon" key={index}>
+                    {pokemon.image && (
+                      <ImageContainer>
+                        <Pokeball />
+                        <Image
+                          layout="fixed"
+                          width={80}
+                          height={80}
+                          src={pokemon.image}
+                          alt={pokemon.name}
+                          placeholder="empty"
+                        />
+                      </ImageContainer>
+                    )}
+                    <p>{pokemon.name}</p>
+                  </div>
+
+                  {index === 0 && (
+                    <div className="level">
+                      <HiOutlineArrowNarrowRight />
+                      <p>{item.minLevel}</p>
+                    </div>
+                  )}
+                </>
+              ))}
             </div>
           ))}
-        </div>
-      ))}
+        </>
+      )}
     </Container>
   );
 };

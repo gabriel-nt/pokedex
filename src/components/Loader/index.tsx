@@ -1,5 +1,11 @@
 import { Container } from './styles';
 
-const Loader = () => <Container>Catching pokémons...</Container>;
+interface LoaderProps {
+  alignCenter?: boolean;
+}
+
+const Loader = ({ alignCenter = true }: LoaderProps) => (
+  <Container alignCenter={alignCenter}>Catching pokémons...</Container>
+);
 
 export { Loader };
