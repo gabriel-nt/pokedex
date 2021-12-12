@@ -1,14 +1,14 @@
 import { PokemonTypes } from '../../../shared/types';
 
 export enum ActionTypes {
+  CLOSE_MODAL = '@pokemons/CLOSE_MODAL',
   LOAD_REQUEST = '@pokemons/LOAD_REQUEST',
   LOAD_SUCCCES = '@pokemons/LOAD_SUCCCES',
   LOAD_FAILURE = '@pokemons/LOAD_FAILURE',
+  SELECT_POKEMON = '@pokemons/SELECT_POKEMON',
   ORDER_POKEMONS = '@pokemons/ORDER_POKEMONS',
   FILTER_POKEMONS = '@pokemons/FILTER_POKEMONS',
   SEARCH_POKEMONS = '@pokemons/SEARCH_POKEMONS',
-  SELECT_POKEMON = '@pokemons/SELECT_POKEMON',
-  CLOSE_MODAL = '@pokemons/CLOSE_MODAL',
 }
 
 export interface Pokemon {

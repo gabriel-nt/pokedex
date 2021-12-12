@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Pokemon } from '../../store/modules/pokemons/types';
+
 import { About } from './About';
 import { BaseStats } from './BaseStats';
 import { Evolution } from './Evolution';
+import { Pokemon } from '../../store/modules/pokemons/types';
 
 import { Container, TabItem } from './styles';
 
@@ -42,11 +43,10 @@ const Tabs = ({ data }: TabsProps) => {
           Evolution
         </TabItem>
       </div>
+
       {activeTab === 1 && <About data={data} />}
-
-      {activeTab === 2 && <BaseStats stats={data.stats} type={data.types[0]} />}
-
       {activeTab === 3 && <Evolution id={data.id} />}
+      {activeTab === 2 && <BaseStats stats={data.stats} type={data.types[0]} />}
     </Container>
   );
 };

@@ -1,12 +1,20 @@
 import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { api } from '../../../services/api';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-import { getImageByPokemonName } from '../../../utils';
 
-import { Container, Pokeball, ImageContainer } from './styles';
 import { Loader } from '../../Loader';
+import { api } from '../../../services/api';
+import { EvolutionResponse } from '../../../shared/types';
+import { getEvolutionLevel, getImageByPokemonName } from '../../../utils';
+
+import {
+  Pokeball,
+  EmptyList,
+  Container,
+  ImageContainer,
+  EvolutionTitle,
+} from './styles';
 
 interface EvolutionProps {
   id: number;
@@ -20,32 +28,6 @@ type Evolutions = {
   }>;
 };
 
-type EnvolvesTo = {
-  evolution_details: Array<{
-    min_level: number;
-    min_happiness: number;
-    item: {
-      name: string;
-    };
-    trigger: {
-      name: string;
-    };
-  }>;
-  species: {
-    name: string;
-  };
-  evolves_to: Array<EnvolvesTo>;
-};
-
-type PokemonEvolutionResponse = {
-  chain: {
-    species: {
-      name: string;
-    };
-    evolves_to: Array<EnvolvesTo>;
-  };
-};
-
 const Evolution = ({ id }: EvolutionProps) => {
   const [loaded, setLoaded] = useState(false);
   const [evolutions, setEvolutions] = useState<Evolutions[]>([]);
@@ -55,7 +37,7 @@ const Evolution = ({ id }: EvolutionProps) => {
       const tempArray = [];
 
       const response = await api.get(`pokemon-species/${id}`);
-      const { data } = await axios.get<PokemonEvolutionResponse>(
+      const { data } = await axios.get<EvolutionResponse>(
         response.data.evolution_chain.url
       );
 
@@ -77,11 +59,9 @@ const Evolution = ({ id }: EvolutionProps) => {
         tempArray.push({
           pokemons: [pokemonN1, pokemonN2],
           minLevel:
-            (evolvesTo01.evolution_details[0].min_level &&
-              `Lvl ${evolvesTo01.evolution_details[0].min_level}`) ??
-            (evolvesTo01.evolution_details[0].min_happiness &&
-              `Lvl ${evolvesTo01.evolution_details[0].min_happiness}`) ??
-            `Use ${evolvesTo01.evolution_details[0].item.name}`,
+            (evolvesTo01.evolution_details[0] &&
+              getEvolutionLevel(evolvesTo01)) ??
+            '',
         });
 
         if (evolvesTo02.length > 0) {
@@ -93,11 +73,9 @@ const Evolution = ({ id }: EvolutionProps) => {
           tempArray.push({
             pokemons: [pokemonN2, pokemonN3],
             minLevel:
-              (evolvesTo02[0].evolution_details[0].min_level &&
-                `Lvl ${evolvesTo02[0].evolution_details[0].min_level}`) ??
-              (evolvesTo02[0].evolution_details[0].min_happiness &&
-                `Lvl ${evolvesTo02[0].evolution_details[0].min_happiness}`) ??
-              `Use ${evolvesTo02[0].evolution_details[0].item.name}`,
+              (evolvesTo02[0].evolution_details[0] &&
+                getEvolutionLevel(evolvesTo02[0])) ??
+              '',
           });
         }
       }
@@ -108,46 +86,51 @@ const Evolution = ({ id }: EvolutionProps) => {
 
     setTimeout(() => {
       loadEvolution();
-    }, 1000);
+    }, 600);
   }, [id]);
 
   return (
     <Container>
+      <EvolutionTitle>Evolution Chain</EvolutionTitle>
       {!loaded ? (
         <Loader alignCenter={false} />
       ) : (
         <>
-          {evolutions.map(item => (
-            <div key={item.minLevel}>
-              {item.pokemons.map((pokemon, index) => (
-                <>
-                  <div className="pokemon" key={index}>
-                    {pokemon.image && (
-                      <ImageContainer>
-                        <Pokeball />
-                        <Image
-                          layout="fixed"
-                          width={80}
-                          height={80}
-                          src={pokemon.image}
-                          alt={pokemon.name}
-                          placeholder="empty"
-                        />
-                      </ImageContainer>
-                    )}
-                    <p>{pokemon.name}</p>
-                  </div>
-
-                  {index === 0 && (
-                    <div className="level">
-                      <HiOutlineArrowNarrowRight />
-                      <p>{item.minLevel}</p>
+          {evolutions.length > 0 ? (
+            evolutions.map(item => (
+              <div key={item.minLevel}>
+                {item.pokemons.map((pokemon, index) => (
+                  <>
+                    <div className="pokemon" key={index}>
+                      {pokemon.image && (
+                        <ImageContainer>
+                          <Pokeball />
+                          <Image
+                            layout="fixed"
+                            width={80}
+                            height={80}
+                            src={pokemon.image}
+                            alt={pokemon.name}
+                            placeholder="empty"
+                          />
+                        </ImageContainer>
+                      )}
+                      <p>{pokemon.name}</p>
                     </div>
-                  )}
-                </>
-              ))}
-            </div>
-          ))}
+
+                    {index === 0 && (
+                      <div className="level">
+                        <HiOutlineArrowNarrowRight />
+                        <p>{item.minLevel}</p>
+                      </div>
+                    )}
+                  </>
+                ))}
+              </div>
+            ))
+          ) : (
+            <EmptyList>This pokemon does not evolution</EmptyList>
+          )}
         </>
       )}
     </Container>

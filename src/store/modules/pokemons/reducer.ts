@@ -1,27 +1,26 @@
 import { Reducer } from 'redux';
 
 import {
-  filterPokemonsByGen,
-  searchPokemonsByName,
   sortPokemonsById,
   sortPokemonsByName,
+  filterPokemonsByGen,
+  searchPokemonsByName,
 } from '../../../utils';
-import { selectPokemon } from './actions';
 
 import {
   ActionTypes,
-  FilterOptions,
   OrderOptions,
+  FilterOptions,
   PokemonsState,
 } from './types';
 
 const INITIAL_STATE: PokemonsState = {
-  allPokemons: [],
-  currentPokemons: [],
   error: false,
   loaded: false,
+  allPokemons: [],
   searchValue: '',
   showModal: false,
+  currentPokemons: [],
   selectedPokemon: undefined,
   filter: {
     text: 'I',

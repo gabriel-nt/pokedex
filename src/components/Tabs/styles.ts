@@ -7,18 +7,18 @@ interface ITabItemProps {
 }
 
 export const Container = styled.div`
-  color: #333;
-  padding: 20px;
   bottom: 0;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 0 7px 0 rgb(0 0 0 / 40%);
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 0.5rem 0 rgb(0 0 0 / 40%);
+  color: ${({ theme }) => theme.colors.dark};
+  background-color: ${({ theme }) => theme.backgrounds.white};
 
   .tabs {
     display: flex;
-    margin-bottom: 1rem;
     align-items: center;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    border-bottom: 0.125rem solid rgba(0, 0, 0, 0.05);
   }
 
   table {
@@ -34,8 +34,8 @@ export const Container = styled.div`
 
       &:nth-child(2) {
         display: flex;
-        align-items: center;
         font-weight: bold;
+        align-items: center;
       }
     }
   }
@@ -48,31 +48,33 @@ export const Container = styled.div`
 `;
 
 export const TabItem = styled.span<ITabItemProps>`
-  background: transparent;
   border: none;
-  font-weight: 700;
-  font-size: 1rem;
-  font-family: inherit;
   padding: 1rem;
-  position: relative;
-  color: ${({ active }) => (active ? '#333' : 'rgba(0, 0, 0, 0.2)')};
   outline: none;
-  transition: all 0.3s;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: 700;
+  position: relative;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: all 0.3s;
+  background: transparent;
+  color: ${({ theme, active }) =>
+    active ? theme.colors.dark : 'rgba(0, 0, 0, 0.2)'};
 
   &:after {
+    left: 0;
     content: '';
     width: 100%;
     height: 3px;
-    left: 0;
-    position: absolute;
     bottom: -2px;
+    position: absolute;
     transition: all 0.3s;
     background-color: ${({ theme, active, type }) =>
       active && theme.backgrounds[type]};
   }
 
   &:hover {
-    color: #333;
+    color: ${({ theme }) => theme.colors.dark};
   }
 `;

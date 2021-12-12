@@ -1,9 +1,9 @@
 import {
-  ActionTypes,
-  FilterOptions,
-  LoadPokemons,
-  OrderOptions,
   Pokemon,
+  ActionTypes,
+  OrderOptions,
+  LoadPokemons,
+  FilterOptions,
 } from './types';
 
 export const loadRequest = ({ initial, limit, offset }: LoadPokemons) => {

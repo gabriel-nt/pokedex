@@ -1,13 +1,13 @@
 import Image from 'next/image';
-
-import { formatId } from '../../utils';
-import { badges } from '../../assets/badges';
-import { Pokemon } from '../../store/modules/pokemons/types';
-
-import { BadgeContainer, Container, ImageContainer, Pokeball } from './styles';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+
+import { formatId } from '../../utils';
+import { badges } from '../../utils/constants';
+import { Pokemon } from '../../store/modules/pokemons/types';
 import { selectPokemon } from '../../store/modules/pokemons/actions';
+
+import { BadgeContainer, Container, ImageContainer, Pokeball } from './styles';
 
 interface CardProps {
   data: Pokemon;
@@ -43,7 +43,7 @@ const Card = ({ data }: CardProps) => {
       <BadgeContainer>
         {data.types.map(type => (
           <div key={type}>
-            <Image src={badges[type]} layout="fixed" alt="test" />
+            <Image src={badges[type]} layout="fixed" alt={type} />
           </div>
         ))}
       </BadgeContainer>

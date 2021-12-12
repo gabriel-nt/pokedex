@@ -5,25 +5,25 @@ interface ISelectProps {
 }
 
 export const Container = styled.div<ISelectProps>`
-  color: #333;
-  position: relative;
-  min-width: 300px;
-  padding: 0.5rem 1rem;
-  background-color: #fff;
-  border-radius: ${({ isActive }) => (isActive ? '8px 8px 0 0' : '8px')};
-  box-shadow: 0 0 15px 0 rgb(0 0 0 / 20%);
-
-  cursor: pointer;
   display: flex;
+  cursor: pointer;
+  min-width: 300px;
+  position: relative;
   align-items: center;
+  padding: 0.5rem 1rem;
   justify-content: space-between;
+  box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
+  color: ${({ theme }) => theme.colors.dark};
+  border-radius: ${({ isActive }) =>
+    isActive ? '0.5rem 0.5rem 0 0' : '0.5rem'};
+  background-color: ${({ theme }) => theme.backgrounds.white};
 
   svg {
     font-size: 1.5rem;
     transition: transform 0.2s ease-in;
 
     &:first-child {
-      width: 24px;
+      width: 1.5rem;
       animation: ${({ isActive }) =>
         isActive ? 'spinBall 0.2s linear 1' : 'revertSpinBall 0.2s linear 1'};
     }
@@ -36,12 +36,12 @@ export const Container = styled.div<ISelectProps>`
   }
 
   label {
-    font-family: 'Roboto';
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: 0.8px;
-    padding: 0 52px 0 12px;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Roboto';
+    letter-spacing: 0.8px;
+    padding: 0 3.25rem 0 0.75rem;
   }
 
   @keyframes spinBall {
@@ -60,33 +60,33 @@ export const Container = styled.div<ISelectProps>`
     min-width: auto;
 
     label {
-      padding: 0 8px 0 12px;
+      padding: 0 1rem 0 0.75rem;
     }
   }
 `;
 
 export const ListOptions = styled.ul<ISelectProps>`
-  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
-  position: absolute;
-  visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
-  list-style: none;
-  width: 100%;
-  border-radius: 0 0 8px 8px;
-  background-color: #fff;
-  z-index: 10;
   left: 0;
   top: 100%;
+  width: 100%;
+  z-index: 10;
+  list-style: none;
+  position: absolute;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 0.375rem 1rem 0px rgb(0 0 0 / 20%);
+  opacity: ${({ isActive }) => (isActive ? 1 : 0)};
   transition: opacity 0.2s ease-in, visibility 0.3s ease-in;
-  box-shadow: 0 5px 15px 0px rgb(0 0 0 / 20%);
+  background-color: ${({ theme }) => theme.backgrounds.white};
+  visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
 
   li {
-    padding: 8px 16px;
     cursor: pointer;
     font-weight: 500;
+    padding: 0.5rem 1rem;
 
     &:hover {
       outline: none;
-      background-color: #eee;
+      background-color: ${({ theme }) => theme.backgrounds.gray};
     }
   }
 `;

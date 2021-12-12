@@ -11,58 +11,62 @@ interface IOverlayProps {
 }
 
 export const Container = styled.div<IContainerProps>`
+  top: 50%;
+  left: 50%;
   z-index: 101;
   color: white;
-  max-height: 100vh;
+  position: fixed;
   max-width: 480px;
   min-width: 460px;
-  left: 50%;
-  top: 50%;
+  overflow: hidden;
+  max-height: 100vh;
   min-height: 400px;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease-in;
   transform: translate(-50%, -50%);
-  position: fixed;
   opacity: ${({ active }) => (active ? 1 : 0)};
   visibility: ${({ active }) => (active ? 'visible' : 'hidden')};
   background-color: ${({ theme, type }) => theme.backgrounds[type]};
-  transition: all 0.2s ease-in;
-  border-radius: 12px;
-  overflow: hidden;
+
+  @media (max-width: 480px) {
+    min-width: 95%;
+    max-width: 345px;
+  }
 `;
 
 export const ModalHeader = styled.div`
-  display: flex;
-  position: absolute;
   width: 100%;
-  padding: 20px;
-
+  display: flex;
+  padding: 1.25rem;
+  position: absolute;
   align-items: center;
   justify-content: space-between;
 
   p {
-    font-family: 'Roboto';
-    letter-spacing: -1px;
-    font-weight: 500;
-    color: hsla(0, 0%, 100%, 0.4);
-    line-height: 14px;
     font-size: 2rem;
+    font-weight: 500;
+    line-height: 1rem;
+    letter-spacing: -1px;
+    font-family: 'Roboto';
+    color: ${({ theme }) => theme.colors.light04};
   }
 
   svg {
-    width: 30px;
-    height: 30px;
     cursor: pointer;
+    width: 1.875rem;
+    height: 1.875rem;
   }
 `;
 
 export const ModalContent = styled.div`
   display: flex;
-  justify-content: center;
-  flex-direction: column;
   align-items: center;
-  padding: 20px 20px 0 20px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.25rem 1.25rem 0 1.25rem;
 
   h1 {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     text-transform: capitalize;
   }
 
@@ -78,43 +82,43 @@ export const ModalContent = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  transition: top 0.8s ease;
-  margin-top: 12px;
-  z-index: 1000;
   height: 150px;
+  z-index: 1000;
+  margin-top: 0.5rem;
+  transition: top 0.8s ease;
 `;
 
 export const Overlay = styled.div<IOverlayProps>`
-  position: fixed;
-  bottom: 0;
   top: 0;
-  right: 0;
   left: 0;
-  opacity: ${({ active }) => (active ? 1 : 0)};
-  transition: all 0.3s;
+  right: 0;
+  bottom: 0;
   z-index: 100;
+  position: fixed;
+  transition: all 0.3s;
   background-color: rgba(0, 0, 0, 0.5);
+  opacity: ${({ active }) => (active ? 1 : 0)};
 `;
 
 export const Pokeball = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   right: -32px;
   bottom: 65px;
-  font-size: 10px;
   height: 100%;
+  display: flex;
   overflow: hidden;
-  color: hsla(0, 0%, 100%, 0.2);
+  position: absolute;
+  font-size: 0.625rem;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.light02};
 
   &:before {
     content: '';
-    position: relative;
     width: 180px;
-    padding-bottom: 10em;
     border: 4em solid;
+    position: relative;
     border-radius: 100%;
+    padding-bottom: 10em;
     clip-path: polygon(
       0 0,
       0 40%,
@@ -132,9 +136,9 @@ export const Pokeball = styled.div`
   }
 
   &:after {
+    width: 5em;
     content: '';
     position: absolute;
-    width: 5em;
     padding-bottom: 5em;
     border-radius: 100%;
     background-color: currentColor;

@@ -1,6 +1,12 @@
-import { FilterParams, SearchParams, SortParams } from '../shared/types';
-import { Pokemon } from '../store/modules/pokemons/types';
+import {
+  EvolvesTo,
+  SortParams,
+  FilterParams,
+  SearchParams,
+} from '../shared/types';
+
 import { STORAGE_POKEMONS } from './constants';
+import { Pokemon } from '../store/modules/pokemons/types';
 
 export const formatId = (id: string | number) => {
   return `#${String(id).padStart(4, '0')}`;
@@ -31,6 +37,23 @@ export const getImageByPokemonName = (name: string) => {
   }
 };
 
+export const getEvolutionLevel = (evolves: EvolvesTo) => {
+  return (
+    (evolves.evolution_details[0].min_level &&
+      `Lvl ${evolves.evolution_details[0].min_level}`) ??
+    (evolves.evolution_details[0].min_happiness &&
+      `Lvl ${evolves.evolution_details[0].min_happiness}`) ??
+    (evolves.evolution_details[0].trigger &&
+      `Use ${evolves.evolution_details[0].trigger.name}`) ??
+    (evolves.evolution_details[0].item &&
+      `Use ${evolves.evolution_details[0].item.name}`) ??
+    (evolves.evolution_details[0].known_move &&
+      `Use ${evolves.evolution_details[0].known_move.name}`) ??
+    (evolves.evolution_details[0].held_item &&
+      `Use ${evolves.evolution_details[0].held_item.name}`)
+  );
+};
+
 export const searchPokemonsByName = ({ data, name }: SearchParams) => {
   return data.filter(item => item.name.indexOf(name) !== -1);
 };
@@ -52,9 +75,5 @@ export const sortPokemonsByName = ({ data, order }: SortParams) => {
 };
 
 export const filterPokemonsByGen = ({ data, offset, limit }: FilterParams) => {
-  // console.log(data);
-  // console.log(offset, limit);
-  // console.log(data.slice(offset, limit));
-
   return data.slice(offset, limit);
 };

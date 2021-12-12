@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import type { NextPage } from 'next';
+
 import { Header } from '../components/Header';
-
-import { Container, InfomationContainer } from '../styles/pages/home';
-
 import { Carousel } from '../components/Carousel';
 import { NewsCarousel } from '../components/NewsCarousel';
+
+import { Container, InfomationContainer } from '../styles/pages/home';
 
 const Home: NextPage = () => {
   return (

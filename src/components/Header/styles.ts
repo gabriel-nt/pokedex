@@ -5,55 +5,55 @@ interface IMenuContainerProps {
 }
 
 export const Container = styled.header`
-  display: flex;
   width: 100%;
-  max-width: 1440px;
+  display: flex;
   margin: 0 auto;
-  padding: 10px 40px;
+  max-width: 1440px;
   align-items: center;
+  padding: 0.625rem 2.5rem;
   justify-content: space-between;
 
   @media (max-width: 500px) {
-    padding: 10px 20px;
     flex-direction: column;
+    padding: 0.625rem 1.25rem;
   }
 `;
 
 export const ImageContainer = styled.div`
-  max-width: 150px;
   cursor: pointer;
+  max-width: 150px;
 `;
 
 export const InputContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-radius: 20px;
-  padding: 9px 15px;
-  background-color: #fff;
-  box-shadow: 0 0 15px 0 rgb(0 0 0 / 20%);
+  padding: 0.625rem 1rem;
+  border-radius: 1.25rem;
+  justify-content: space-between;
+  box-shadow: 0 0 1rem 0 rgb(0 0 0 / 20%);
+  background-color: ${({ theme }) => theme.backgrounds.white};
 
   > input {
-    outline: none;
     border: none;
-    padding: 0 5px;
-    font-size: 0.9rem;
-    background-color: transparent;
-    font-family: 'Roboto';
-    font-weight: 500;
+    outline: none;
     max-width: 120px;
-    color: #333;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0 0.31rem;
+    font-family: 'Roboto';
+    background-color: transparent;
+    color: ${({ theme }) => theme.backgrounds.dark};
 
     &::placeholder {
       font-weight: 500;
-      color: #333;
       font-family: 'Roboto';
+      color: ${({ theme }) => theme.backgrounds.dark};
     }
   }
 
   > svg {
     font-size: 1.2rem;
-    color: #333;
+    color: ${({ theme }) => theme.backgrounds.dark};
 
     &:hover {
       cursor: pointer;
@@ -63,8 +63,8 @@ export const InputContainer = styled.div`
 
 export const MenuContainer = styled.div<IMenuContainerProps>`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   > div {
     display: ${({ showSearch }) => (showSearch ? 'flex' : 'none')};
@@ -72,8 +72,9 @@ export const MenuContainer = styled.div<IMenuContainerProps>`
 
   > svg {
     font-size: 1.5rem;
-    margin-left: 60px;
-    color: ${({ showSearch }) => (showSearch ? '#333' : '#fff')};
+    margin-left: 3.75rem;
+    color: ${({ theme, showSearch }) =>
+      showSearch ? theme.colors.dark : theme.colors.white};
   }
 
   @media (max-width: 516px) {
@@ -81,7 +82,7 @@ export const MenuContainer = styled.div<IMenuContainerProps>`
     justify-content: space-between;
 
     > svg {
-      margin-left: 24px;
+      margin-left: 1.5rem;
       display: ${({ showSearch }) => (showSearch ? 'block' : 'none')};
     }
   }

@@ -11,12 +11,12 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.section`
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 36px 16px;
-  display: grid;
-  flex-direction: row;
   z-index: 2;
+  display: grid;
+  margin: 0 auto;
+  max-width: 1440px;
+  flex-direction: row;
+  padding: 2.25rem 1rem;
   grid-template-columns: 1fr;
 
   @media (max-width: 500px) {

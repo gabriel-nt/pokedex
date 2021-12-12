@@ -1,8 +1,19 @@
 import Image from 'next/image';
-
+import { useCallback } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { Tabs } from '../Tabs';
 import { formatId } from '../../utils';
+import { badges } from '../../utils/constants';
+import { ApplicationState } from '../../store';
+import { Pokemon } from '../../store/modules/pokemons/types';
+
+import {
+  closeModal,
+  selectPokemon,
+} from '../../store/modules/pokemons/actions';
+
 import {
   Container,
   Overlay,
@@ -11,18 +22,6 @@ import {
   ImageContainer,
   Pokeball,
 } from './styles';
-import { Pokemon } from '../../store/modules/pokemons/types';
-
-import { badges } from '../../assets/badges';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { ApplicationState } from '../../store';
-import { useCallback } from 'react';
-import {
-  closeModal,
-  selectPokemon,
-} from '../../store/modules/pokemons/actions';
-import { Tabs } from '../Tabs';
 
 interface ModalProps {
   data: Pokemon;

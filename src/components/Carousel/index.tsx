@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import SwiperCore, {
@@ -7,16 +8,13 @@ import SwiperCore, {
   EffectFade,
 } from 'swiper';
 
-import Image from 'next/image';
 import { Container } from './styles';
 
-type ICarouseProps = {};
-
-import charizardImg from '../../assets/pokemons/charizard.png';
 import suicuneImg from '../../assets/pokemons/suicune.png';
 import pikachuImg from '../../assets/pokemons/pikachu.png';
+import charizardImg from '../../assets/pokemons/charizard.png';
 
-const Carousel = ({}: ICarouseProps) => {
+const Carousel = () => {
   SwiperCore.use([Autoplay, Pagination, Navigation, EffectFade]);
 
   return (

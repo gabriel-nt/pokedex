@@ -5,20 +5,20 @@ export const Container = styled.div`
 
   .swiper-slide {
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 1.5rem;
   }
 
   @media (max-width: 902px) {
-    margin-top: 70px;
+    margin-top: 4.375rem;
   }
 `;
 
 export const Pagination = styled.div`
   display: flex;
-  gap: 6px;
-  margin-top: 12px;
-  justify-content: center;
+  gap: 0.375rem;
+  margin-top: 0.75rem;
   align-items: center;
+  justify-content: center;
 
   span {
     font-weight: 700;
@@ -26,17 +26,17 @@ export const Pagination = styled.div`
   }
 
   svg {
-    font-size: 24px;
     cursor: pointer;
+    font-size: 1.5rem;
     transition: transform 0.2s ease-in-out;
 
     &:hover {
       &:first-child {
-        transform: translateX(-4px);
+        transform: translateX(-0.25rem);
       }
 
       &:last-child {
-        transform: translateX(4px);
+        transform: translateX(0.25rem);
       }
     }
   }

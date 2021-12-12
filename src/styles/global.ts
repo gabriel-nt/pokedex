@@ -16,19 +16,19 @@ export default createGlobalStyle`
   }
 
   body {
-    color: #fff;
     width: 100%;
     height: 100vh;
-    background-color: #f1f1f1;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.backgrounds.light};
   }
 
   a {
-    color: ${({ theme }) => theme.colors.white};
     text-decoration: none;
+    color: ${({ theme }) => theme.colors.white};
   }
 
   p {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 140%;
     letter-spacing: 1px;
   }

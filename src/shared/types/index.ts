@@ -72,3 +72,35 @@ export type PokemonResponse = {
     };
   };
 };
+
+export type EvolvesTo = {
+  evolution_details: Array<{
+    min_level: number;
+    min_happiness: number;
+    item: {
+      name: string;
+    };
+    known_move: {
+      name: string;
+    };
+    held_item: {
+      name: string;
+    };
+    trigger: {
+      name: string;
+    };
+  }>;
+  species: {
+    name: string;
+  };
+  evolves_to: Array<EvolvesTo>;
+};
+
+export type EvolutionResponse = {
+  chain: {
+    species: {
+      name: string;
+    };
+    evolves_to: Array<EvolvesTo>;
+  };
+};

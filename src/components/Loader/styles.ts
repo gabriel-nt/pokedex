@@ -5,23 +5,22 @@ interface IContainerProps {
 }
 
 export const Container = styled.div<IContainerProps>`
+  display: flex;
+  font-weight: 500;
   font-size: 1.2rem;
   position: relative;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  padding: ${({ alignCenter }) => (alignCenter ? '29vh 0' : '6vh 0')};
-  color: #333;
-  flex-direction: column;
   font-family: 'Roboto';
-  font-weight: 500;
+  flex-direction: column;
+  justify-content: center;
+  color: ${({ theme }) => theme.backgrounds.dark};
+  padding: ${({ alignCenter }) => (alignCenter ? '29vh 0' : '6vh 0')};
 
   &:before {
+    width: 3em;
+    height: 3em;
     content: '';
     display: block;
-    height: 3em;
-    width: 3em;
-    border: 0.6em solid #fb6c6c;
     border-radius: 100%;
     margin-bottom: 10px;
     clip-path: polygon(
@@ -39,18 +38,19 @@ export const Container = styled.div<IContainerProps>`
       100% 0
     );
     animation: spin 0.5s infinite ease-in-out;
+    border: 0.6em solid ${({ theme }) => theme.backgrounds.fire};
   }
 
   &:after {
+    top: 50%;
     content: '';
+    width: 1.2em;
+    height: 1.2em;
     display: block;
     position: absolute;
-    top: 50%;
     margin-top: -1.45em;
-    height: 1.2em;
-    width: 1.2em;
-    background-color: #ccc;
     border-radius: 100%;
+    background-color: ${({ theme }) => theme.backgrounds.gray};
   }
 
   @keyframes spin {

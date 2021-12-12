@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  height: 50vh;
   display: flex;
   align-items: center;
-  height: 50vh;
   justify-content: center;
-
-  color: #333;
+  color: ${({ theme }) => theme.colors.dark};
 
   svg {
-    width: 40px;
-    transition: transform 0.2s ease-in;
+    width: 2.5rem;
     animation: spinBall 0.2s linear 1;
+    transition: transform 0.2s ease-in;
   }
 
   div {
-    margin-left: 16px;
+    margin-left: 1rem;
   }
 
   @keyframes spinBall {
@@ -28,7 +27,7 @@ export const Container = styled.div`
     min-width: auto;
 
     label {
-      padding: 0 8px 0 12px;
+      padding: 0 0.5rem 0 0.75rem;
     }
   }
 `;

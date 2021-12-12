@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 55%;
-  padding: 20px 40px;
+  padding: 1.25rem 2.5rem;
 
   .img-mobile {
     display: none !important;
@@ -15,12 +15,12 @@ export const Container = styled.div`
 
   .swiper-slide {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
   .swiper-pagination-bullet-active {
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.backgrounds.white};
   }
 
   @media (max-width: 902px) {

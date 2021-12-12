@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import { api } from '../../../services/api';
-
 import { loadFailure, loadSuccess } from './actions';
 import { STORAGE_POKEMONS } from '../../../utils/constants';
 import { ActionTypes, LoadPokemons, Pokemon } from './types';

@@ -15,17 +15,17 @@ export const Container = styled.div`
 
     .pokemon {
       display: flex;
-      padding: 4px 40px;
       align-items: center;
       flex-direction: column;
+      padding: 0.25rem 2.5rem;
 
       p {
-        font-weight: 700;
         font-size: 1rem;
-        padding-top: 8px;
-        text-transform: capitalize;
         cursor: pointer;
-        margin: 12px 0 16px 0;
+        font-weight: 700;
+        padding-top: 0.5rem;
+        margin: 0.75rem 0 1rem 0;
+        text-transform: capitalize;
       }
     }
 
@@ -33,8 +33,8 @@ export const Container = styled.div`
       text-align: center;
 
       svg {
-        color: #ccc;
         font-size: 2rem;
+        color: ${({ theme }) => theme.colors.gray};
       }
 
       p {
@@ -44,13 +44,21 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media (max-width: 480px) {
+    > div {
+      .pokemon {
+        padding: 0.25rem 1rem;
+      }
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`
-  position: relative;
-  text-align: center;
   width: 100%;
   display: flex;
+  position: relative;
+  text-align: center;
   align-items: center;
   justify-content: center;
 
@@ -60,18 +68,18 @@ export const ImageContainer = styled.div`
 `;
 
 export const Pokeball = styled.div`
-  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  right: auto;
+  bottom: auto;
   display: flex;
+  font-size: 0.7vmin;
+  position: absolute;
   align-items: center;
   justify-content: center;
   color: rgba(0, 0, 0, 0.05);
-  right: auto;
-  bottom: auto;
-  left: 50%;
-  top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  font-size: 0.7vmin;
-  z-index: 1;
 
   &:before,
   &:after {
@@ -102,9 +110,9 @@ export const Pokeball = styled.div`
   }
 
   &:after {
+    width: 5em;
     content: '';
     position: absolute;
-    width: 5em;
     padding-bottom: 5em;
     background-color: currentColor;
   }
@@ -113,5 +121,21 @@ export const Pokeball = styled.div`
     right: 0;
     bottom: 0;
     height: auto;
+  }
+`;
+
+export const EmptyList = styled.p`
+  width: 100%;
+  text-align: left;
+  padding-bottom: 0.5rem;
+`;
+
+export const EvolutionTitle = styled.h3`
+  width: 100%;
+  text-align: left;
+  padding-bottom: 0.75rem;
+
+  @media (max-width: 480px) {
+    display: none;
   }
 `;

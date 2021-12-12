@@ -3,24 +3,28 @@ import type { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Card } from '../components/Card';
+import { Modal } from '../components/Modal';
 import { Header } from '../components/Header';
 import { Loader } from '../components/Loader';
 import { Navigation } from '../components/Navigation';
 import { NoSearchResults } from '../components/NoSearchResults';
 
+import { filterPokemonsByGen } from '../utils';
+import {
+  generations,
+  TOTAL_LIMIT,
+  DEFAULT_LIMIT,
+  DEFAULT_OFFSET,
+  STORAGE_POKEMONS,
+} from '../utils/constants';
+
 import { ApplicationState } from '../store';
 import { Pokemon } from '../store/modules/pokemons/types';
 import { loadRequest, loadSuccess } from '../store/modules/pokemons/actions';
 
-import { filterPokemonsByGen } from '../utils';
-import { generations, STORAGE_POKEMONS } from '../utils/constants';
-
 import { Container, Content } from '../styles/pages/pokemons';
-import { Modal } from '../components/Modal';
 
 const Pokemons: NextPage = () => {
-  const DEFAULT_LIMIT = 81;
-  const DEFAULT_OFFSET = 81;
   const dispatch = useDispatch();
 
   const pokemons = useSelector<ApplicationState, Pokemon[]>(
@@ -81,7 +85,7 @@ const Pokemons: NextPage = () => {
         loadRequest({
           initial: false,
           offset: DEFAULT_OFFSET,
-          limit: 817,
+          limit: TOTAL_LIMIT,
         })
       );
     }

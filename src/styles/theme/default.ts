@@ -1,7 +1,7 @@
 const theme = {
   title: 'default',
   backgrounds: {
-    dark: '#333',
+    dark: '#333333',
     bug: '#C3CE75',
     dragon: '#F9BE00',
     electric: '#FFD86F',
@@ -16,12 +16,23 @@ const theme = {
     normal: '#C2C2A1',
     poison: '#7C538C',
     psychic: '#9B7FA6',
-    rock: '#a6aab6',
+    rock: '#A6AAB6',
     steel: '#CCCCDE',
     water: '#609FB5',
+    light: '#F1F1F1',
+    black: '#000000',
+    white: '#FFFFFF',
+    gray: '#CCCCCC',
+    purple: '#6C79DB',
+    grayLight: '#EEEEEE',
   },
   colors: {
-    white: '#ffffff',
+    white: '#FFFFFF',
+    dark: '#333333',
+    black: '#000000',
+    gray: '#CCCCCC',
+    light02: 'hsla(0, 0%, 100%, 0.2)',
+    light04: 'hsla(0, 0%, 100%, 0.4)',
   },
 };
 

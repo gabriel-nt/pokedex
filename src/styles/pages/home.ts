@@ -8,18 +8,20 @@ export const Container = styled.section`
   background: linear-gradient(100deg, #f1f1f1 50%, #b8c470 50%);
 
   .content {
-    color: #000;
     display: flex;
-    height: calc(100vh - 110px);
+    margin: 0 auto;
+    max-width: 1440px;
     flex-direction: row;
+    height: calc(100vh - 110px);
+    color: ${({ theme }) => theme.colors.black};
   }
 
   @media (max-width: 902px) {
     .content {
-      flex-direction: column-reverse;
-      align-items: center;
       width: 100%;
       height: 100%;
+      align-items: center;
+      flex-direction: column-reverse;
     }
   }
 `;
@@ -28,14 +30,14 @@ export const InfomationContainer = styled.div`
   width: 45%;
   display: flex;
   flex-direction: column;
-  padding: 20px 40px;
+  padding: 1.25rem 2.5rem;
   justify-content: space-around;
 
   h1 {
-    font-weight: 700;
     font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
     font-family: 'Roboto';
-    margin-bottom: 16px;
   }
 
   p {
@@ -44,14 +46,14 @@ export const InfomationContainer = styled.div`
   }
 
   a {
-    padding: 8px 20px;
-    display: inline-block;
-    border-radius: 20px;
-    color: #fff;
-    margin-top: 32px;
+    margin-top: 2rem;
     font-weight: 500;
     font-family: 'Roboto';
-    background-color: #000;
+    display: inline-block;
+    border-radius: 1.25rem;
+    padding: 0.5rem 1.25rem;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.backgrounds.black};
   }
 
   @media (max-width: 902px) {

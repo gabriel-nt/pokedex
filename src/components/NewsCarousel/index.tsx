@@ -1,8 +1,8 @@
+import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Navigation } from 'swiper';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
 
-import Image from 'next/image';
 import { Container, Pagination } from './styles';
 
 import news01 from '../../assets/news-01.jpg';
@@ -32,9 +32,6 @@ const NewsCarousel = () => {
           },
           550: {
             slidesPerView: 2,
-          },
-          1650: {
-            slidesPerView: 3,
           },
         }}
       >
