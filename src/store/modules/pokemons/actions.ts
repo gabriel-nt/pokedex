@@ -15,52 +15,52 @@ export const loadRequest = ({ initial, limit, offset }: LoadPokemons) => {
   };
 };
 
-export function loadSuccess(payload: Pokemon[], initial: boolean) {
+export const loadSuccess = (payload: Pokemon[], initial: boolean) => {
   return {
     type: ActionTypes.LOAD_SUCCCES,
     payload,
     initial,
   };
-}
+};
 
-export function loadFailure() {
+export const loadFailure = () => {
   return {
     type: ActionTypes.LOAD_FAILURE,
     payload: [],
   };
-}
+};
 
-export function orderPokemons(order: OrderOptions) {
+export const orderPokemons = (order: OrderOptions) => {
   return {
     type: ActionTypes.ORDER_POKEMONS,
     order,
   };
-}
+};
 
-export function filterPokemons(filter: FilterOptions) {
+export const filterPokemons = (filter: FilterOptions) => {
   return {
     type: ActionTypes.FILTER_POKEMONS,
     filter,
   };
-}
+};
 
-export function searchPokemons(searchValue: string) {
+export const searchPokemons = (searchValue: string) => {
   return {
     type: ActionTypes.SEARCH_POKEMONS,
     searchValue,
   };
-}
+};
 
-export function selectPokemon(payload: Pokemon | undefined) {
+export const selectPokemon = (payload: Pokemon | undefined) => {
   return {
     type: ActionTypes.SELECT_POKEMON,
     payload,
   };
-}
+};
 
-export function closeModal(payload: boolean) {
+export const closeModal = (payload: boolean) => {
   return {
     type: ActionTypes.CLOSE_MODAL,
     payload,
   };
-}
+};

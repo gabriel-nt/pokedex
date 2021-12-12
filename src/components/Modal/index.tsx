@@ -22,6 +22,7 @@ import {
   ImageContainer,
   Pokeball,
 } from './styles';
+import { resetEvolutions } from '../../store/modules/evolutions/actions';
 
 interface ModalProps {
   data: Pokemon;
@@ -38,6 +39,7 @@ const Modal = ({ data }: ModalProps) => {
     dispatch(closeModal(false));
 
     setTimeout(() => {
+      dispatch(resetEvolutions());
       dispatch(selectPokemon(undefined));
     }, 200);
   }, [dispatch]);

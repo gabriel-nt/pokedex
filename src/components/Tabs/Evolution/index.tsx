@@ -1,12 +1,7 @@
-import axios from 'axios';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-
-import { Loader } from '../../Loader';
-import { api } from '../../../services/api';
-import { EvolutionResponse } from '../../../shared/types';
-import { getEvolutionLevel, getImageByPokemonName } from '../../../utils';
 
 import {
   Pokeball,
@@ -16,78 +11,31 @@ import {
   EvolutionTitle,
 } from './styles';
 
+import { Loader } from '../../Loader';
+import { ApplicationState } from '../../../store';
+import { Evolutions } from '../../../store/modules/evolutions/types';
+import { loadRequest } from '../../../store/modules/evolutions/actions';
+
 interface EvolutionProps {
   id: number;
 }
 
-type Evolutions = {
-  minLevel: string | number;
-  pokemons: Array<{
-    name: string;
-    image: string | undefined;
-  }>;
-};
-
 const Evolution = ({ id }: EvolutionProps) => {
-  const [loaded, setLoaded] = useState(false);
-  const [evolutions, setEvolutions] = useState<Evolutions[]>([]);
+  const dispatch = useDispatch();
+
+  const loaded = useSelector<ApplicationState, boolean>(
+    state => state.evolutions.loaded
+  );
+
+  const evolutions = useSelector<ApplicationState, Evolutions[]>(
+    state => state.evolutions.evolutions
+  );
 
   useEffect(() => {
-    async function loadEvolution() {
-      const tempArray = [];
-
-      const response = await api.get(`pokemon-species/${id}`);
-      const { data } = await axios.get<EvolutionResponse>(
-        response.data.evolution_chain.url
-      );
-
-      if (data.chain.evolves_to.length > 0) {
-        const species = data.chain.species;
-        const evolvesTo01 = data.chain.evolves_to[0];
-        const { evolves_to: evolvesTo02 } = data.chain.evolves_to[0];
-
-        const pokemonN1 = {
-          name: species.name,
-          image: getImageByPokemonName(species.name),
-        };
-
-        const pokemonN2 = {
-          name: evolvesTo01.species.name,
-          image: getImageByPokemonName(evolvesTo01.species.name),
-        };
-
-        tempArray.push({
-          pokemons: [pokemonN1, pokemonN2],
-          minLevel:
-            (evolvesTo01.evolution_details[0] &&
-              getEvolutionLevel(evolvesTo01)) ??
-            '',
-        });
-
-        if (evolvesTo02.length > 0) {
-          const pokemonN3 = {
-            name: evolvesTo02[0].species.name,
-            image: getImageByPokemonName(evolvesTo02[0].species.name),
-          };
-
-          tempArray.push({
-            pokemons: [pokemonN2, pokemonN3],
-            minLevel:
-              (evolvesTo02[0].evolution_details[0] &&
-                getEvolutionLevel(evolvesTo02[0])) ??
-              '',
-          });
-        }
-      }
-
-      setLoaded(true);
-      setEvolutions([...tempArray]);
-    }
-
     setTimeout(() => {
-      loadEvolution();
+      dispatch(loadRequest(id));
     }, 600);
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <Container>
