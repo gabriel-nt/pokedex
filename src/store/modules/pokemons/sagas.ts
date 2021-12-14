@@ -11,7 +11,11 @@ type Params = LoadPokemons & { type: string };
 
 function* callSafe(name: string) {
   try {
-    return yield call(api.get, `/pokemon/${name}`);
+    const request: AxiosResponse<PokemonResponse> = yield call(
+      api.get,
+      `/pokemon/${name}`
+    );
+    return request;
   } catch (err) {
     return err;
   }
