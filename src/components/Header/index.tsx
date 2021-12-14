@@ -71,16 +71,16 @@ const Header = ({ showSearch = true }: HeaderProps) => {
 
   return (
     <Container>
-      <ImageContainer>
-        <Link href="/" passHref prefetch>
+      <Link href="/" passHref prefetch>
+        <ImageContainer>
           <Image
             src={logoDesktopImg}
             width={640}
             height={360}
             alt="Logo Pokémon"
           />
-        </Link>
-      </ImageContainer>
+        </ImageContainer>
+      </Link>
 
       <MenuContainer showSearch={showSearch}>
         <InputContainer>
