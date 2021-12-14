@@ -57,9 +57,9 @@ function* loadEvolutions({ id }: Params) {
           '',
       });
     }
-
-    yield put(loadSuccess(tempArray));
   }
+
+  yield put(loadSuccess(tempArray));
 }
 
 export default takeLatest(ActionTypes.LOAD_REQUEST, loadEvolutions);

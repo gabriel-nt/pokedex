@@ -46,7 +46,7 @@ const Evolution = ({ id }: EvolutionProps) => {
         <>
           {evolutions.length > 0 ? (
             evolutions.map(item => (
-              <div key={item.minLevel}>
+              <div key={Math.random()}>
                 {item.pokemons.map((pokemon, index) => (
                   <>
                     <div className="pokemon" key={index}>
