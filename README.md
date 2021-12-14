@@ -40,7 +40,7 @@
 Projeto desenvolvido para aprimorar meus conhecimentos em gerencimanentos de estados/contexto com Redux e Redux Sagas. Além disso, aproveito para criar uma aplicação "legal" com a famosa Pokédex API. 
 
 ### ✅ Demonstração
-<img src="https://github.com/gabriel-nt/alurakut/blob/main/public/thumbnail.png" alt="Thumbail"/>
+<img src="https://github.com/gabriel-nt/pokedex/blob/main/src/assets/wallpaper.png" alt="Thumbail"/>
 
 ### ⚙ Pré-requisitos
 
