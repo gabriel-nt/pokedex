@@ -12,12 +12,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <>
       <Head>
         <title>Pokédex</title>
-        <meta name="title" content="Pokedex" />
-        <meta name="description" content="Pokedex" />
+        <meta name="title" content="Pokédex" />
+        <meta name="description" content="Pokédex" />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Pokedex" />
-        <meta property="og:description" content="Pokedex" />
+        <meta property="og:title" content="Pokédex" />
+        <meta property="og:description" content="Pokédex" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />

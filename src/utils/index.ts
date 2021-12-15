@@ -26,11 +26,13 @@ export const getImageByPokemonName = (name: string) => {
   if (storageData) {
     try {
       const allPokemons = JSON.parse(storageData) as Pokemon[];
-      const findPokemon = allPokemons.find(item => item.name === name);
+      var findPokemon = allPokemons.find(item => item.name === name)?.image;
 
-      if (findPokemon) {
-        return findPokemon.image;
+      if (!findPokemon) {
+        findPokemon = allPokemons.find(item => item.name.includes(name))?.image;
       }
+
+      return findPokemon;
     } catch (error) {
       console.log(error);
     }

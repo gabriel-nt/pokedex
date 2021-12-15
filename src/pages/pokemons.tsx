@@ -50,6 +50,10 @@ const Pokemons: NextPage = () => {
       if (allPokemons) {
         var pokemons = JSON.parse(allPokemons) as Pokemon[];
 
+        if (allPokemons.length < 897) {
+          throw new Error('Imcomplete list');
+        }
+
         dispatch(
           loadSuccess(
             filterPokemonsByGen({

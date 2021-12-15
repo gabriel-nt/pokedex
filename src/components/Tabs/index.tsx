@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useCallback, useState } from 'react';
 
 import { About } from './About';
 import { BaseStats } from './BaseStats';
 import { Evolution } from './Evolution';
+import { ApplicationState } from '../../store';
 import { Pokemon } from '../../store/modules/pokemons/types';
 
 import { Container, TabItem } from './styles';
@@ -13,10 +15,22 @@ interface TabsProps {
 
 const Tabs = ({ data }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(1);
+  const [isSelected, setIsSelected] = useState(false);
 
-  const handleUpdateActiveTab = (tab: number) => {
-    setActiveTab(tab);
-  };
+  const loaded = useSelector<ApplicationState, boolean>(
+    state => state.evolutions.loaded
+  );
+
+  const handleUpdateActiveTab = useCallback(
+    (tab: number) => {
+      setActiveTab(tab);
+
+      if (tab === 3 && loaded) {
+        setIsSelected(true);
+      }
+    },
+    [loaded]
+  );
 
   return (
     <Container>
@@ -45,7 +59,7 @@ const Tabs = ({ data }: TabsProps) => {
       </div>
 
       {activeTab === 1 && <About data={data} />}
-      {activeTab === 3 && <Evolution id={data.id} />}
+      {activeTab === 3 && <Evolution id={data.id} isSelected={isSelected} />}
       {activeTab === 2 && <BaseStats stats={data.stats} type={data.types[0]} />}
     </Container>
   );

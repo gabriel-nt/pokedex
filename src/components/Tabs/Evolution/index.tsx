@@ -18,9 +18,10 @@ import { loadRequest } from '../../../store/modules/evolutions/actions';
 
 interface EvolutionProps {
   id: number;
+  isSelected: boolean;
 }
 
-const Evolution = ({ id }: EvolutionProps) => {
+const Evolution = ({ id, isSelected }: EvolutionProps) => {
   const dispatch = useDispatch();
 
   const loaded = useSelector<ApplicationState, boolean>(
@@ -33,9 +34,11 @@ const Evolution = ({ id }: EvolutionProps) => {
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(loadRequest(id));
-    }, 600);
-  }, [id, dispatch]);
+      if (!isSelected) {
+        dispatch(loadRequest(id));
+      }
+    }, 400);
+  }, [id, isSelected, dispatch]);
 
   return (
     <Container>
@@ -48,15 +51,15 @@ const Evolution = ({ id }: EvolutionProps) => {
             evolutions.map(item => (
               <div key={Math.random()}>
                 {item.pokemons.map((pokemon, index) => (
-                  <>
-                    <div className="pokemon" key={index}>
+                  <React.Fragment key={Math.random()}>
+                    <div className="pokemon">
                       {pokemon.image && (
                         <ImageContainer>
                           <Pokeball />
                           <Image
                             layout="fixed"
-                            width={80}
-                            height={80}
+                            width={85}
+                            height={85}
                             src={pokemon.image}
                             alt={pokemon.name}
                             placeholder="empty"
@@ -72,7 +75,7 @@ const Evolution = ({ id }: EvolutionProps) => {
                         <p>{item.minLevel}</p>
                       </div>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             ))

@@ -38,16 +38,14 @@ const Header = ({ showSearch = true }: HeaderProps) => {
   const handleChangeEvent = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
       const target = e.target as HTMLInputElement;
-      if (target.value === '' || e.key === 'Enter') {
-        if (router.asPath === '/' && target.value !== '') {
-          router.push({
-            pathname: '/pokemons',
-            query: { searchValue: target.value },
-          });
-        } else {
-          dispatch(searchPokemons(target.value));
-          dispatch(orderPokemons(currentOrder));
-        }
+      if (router.asPath === '/' && target.value !== '') {
+        router.push({
+          pathname: '/pokemons',
+          query: { searchValue: target.value },
+        });
+      } else {
+        dispatch(searchPokemons(target.value));
+        dispatch(orderPokemons(currentOrder));
       }
     },
     [dispatch, currentOrder, router]
