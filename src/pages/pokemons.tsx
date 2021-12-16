@@ -23,6 +23,7 @@ import { Pokemon } from '../store/modules/pokemons/types';
 import { loadRequest, loadSuccess } from '../store/modules/pokemons/actions';
 
 import { Container, Content } from '../styles/pages/pokemons';
+import { FloatingButton } from '../components/Floating Button';
 
 const Pokemons: NextPage = () => {
   const dispatch = useDispatch();
@@ -98,6 +99,7 @@ const Pokemons: NextPage = () => {
   return (
     <Container>
       <Header showSearch={true} />
+      <FloatingButton />
       <Navigation />
       {!loaded ? (
         <Loader />
