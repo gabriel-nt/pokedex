@@ -68,9 +68,9 @@ $ yarn start
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
+- Next
 - React
 - Typescript
-- Next
 
 ### 📕 Bibliotecas
 
