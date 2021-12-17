@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface ContainerProps {
+interface IContainerProps {
   isActive: boolean;
 }
 
-export const Container = styled.button<ContainerProps>`
+export const Container = styled.button<IContainerProps>`
   right: 1rem;
   bottom: 1rem;
   z-index: 1001;

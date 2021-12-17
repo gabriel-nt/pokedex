@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { PokemonTypes } from '../../shared/types';
 
+interface IOverlayProps {
+  active: boolean;
+}
+
 interface IContainerProps {
   active: boolean;
   type: PokemonTypes;
-}
-
-interface IOverlayProps {
-  active: boolean;
 }
 
 export const Container = styled.div<IContainerProps>`

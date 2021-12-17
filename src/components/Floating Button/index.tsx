@@ -8,11 +8,11 @@ const FloatingButton = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', (_: Event) => {
-      if (window.scrollY >= 600 && !isActive) {
+      if (window.scrollY >= 400 && !isActive) {
         setIsActive(true);
       }
 
-      if (window.scrollY <= 600 && isActive) {
+      if (window.scrollY <= 400 && isActive) {
         setIsActive(false);
       }
     });
