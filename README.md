@@ -29,12 +29,12 @@
 ### 📎 Features 
 
 - [x] LP Inicial
-- [ ] Pesquisa por pokémons
+- [x] Pesquisa por pokémons
 - [x] Listagem de pokémons
 - [x] Filtro por gerações
 - [x] Filtros de ordenação
 - [x] Detalhes dos pokémons
-- [x] EVolução dos pokémons
+- [x] Evolução dos pokémons
 
 ### 💻 Projeto
 Projeto desenvolvido para aprimorar meus conhecimentos em gerencimanentos de estados/contexto com Redux e Redux Sagas. Além disso, aproveito para criar uma aplicação "legal" com a famosa Pokédex API. 
