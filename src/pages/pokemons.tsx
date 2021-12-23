@@ -52,7 +52,7 @@ const Pokemons: NextPage = () => {
         var pokemons = JSON.parse(allPokemons) as Pokemon[];
 
         if (allPokemons.length < 897) {
-          throw new Error('Imcomplete list');
+          throw new Error('Incomplete list');
         }
 
         dispatch(

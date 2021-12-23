@@ -21,55 +21,85 @@ function* callSafe(name: string) {
   }
 }
 
-function* loadPokemons({ initial, offset, limit }: Params) {
-  try {
-    const { data }: AxiosResponse<ListResponse> = yield call(
-      api.get,
-      '/pokemon',
-      {
-        params: {
-          offset: offset,
-          limit: limit,
-        },
+const multipleAttempts = (
+  generator: any,
+  handleError: any,
+  maxTries: number
+) => {
+  return function* multipleAttempts(...args: any) {
+    let n = 0;
+
+    while (n <= maxTries) {
+      try {
+        yield call(generator, ...args);
+        break;
+      } catch (e) {
+        if (n > maxTries) {
+          yield handleError(e);
+        }
       }
-    );
-
-    const arrayGenerators: AxiosResponse<PokemonResponse>[] = yield all(
-      data.results.map(item => callSafe(item.name))
-    );
-
-    const pokemonsList = arrayGenerators.map(item => ({
-      id: item.data.id,
-      name: item.data.name,
-      about: {
-        height: item.data.height,
-        weight: item.data.weight,
-        abilities: item.data.abilities.map(ability => ability.ability.name),
-      },
-      stats: item.data.stats.map(stat => stat.base_stat),
-      types: item.data.types.map(type => type.type.name),
-      image: item.data.sprites.other.dream_world.front_default
-        ? item.data.sprites.other.dream_world.front_default
-        : item.data.sprites.other['official-artwork'].front_default,
-    }));
-
-    if (initial) {
-      localStorage.setItem(STORAGE_POKEMONS, JSON.stringify([...pokemonsList]));
-    } else {
-      var allPokemons = String(localStorage.getItem(STORAGE_POKEMONS));
-
-      var pokemons = JSON.parse(allPokemons) as Pokemon[];
-      localStorage.setItem(
-        STORAGE_POKEMONS,
-        JSON.stringify([...pokemons, ...pokemonsList])
-      );
     }
+  };
+};
 
-    yield put(loadSuccess(pokemonsList, initial));
-  } catch (error) {
-    console.error(error);
+const loadPokemons = multipleAttempts(
+  function* loadPokemons({ initial, offset, limit }: Params) {
+    try {
+      const { data }: AxiosResponse<ListResponse> = yield call(
+        api.get,
+        '/pokemon',
+        {
+          params: {
+            offset: offset,
+            limit: limit,
+          },
+        }
+      );
+
+      const arrayGenerators: AxiosResponse<PokemonResponse>[] = yield all(
+        data.results.map(item => callSafe(item.name))
+      );
+
+      const pokemonsList = arrayGenerators.map(item => ({
+        id: item.data.id,
+        name: item.data.name,
+        about: {
+          height: item.data.height,
+          weight: item.data.weight,
+          abilities: item.data.abilities.map(ability => ability.ability.name),
+        },
+        stats: item.data.stats.map(stat => stat.base_stat),
+        types: item.data.types.map(type => type.type.name),
+        image: item.data.sprites.other.dream_world.front_default
+          ? item.data.sprites.other.dream_world.front_default
+          : item.data.sprites.other['official-artwork'].front_default,
+      }));
+
+      if (initial) {
+        localStorage.setItem(
+          STORAGE_POKEMONS,
+          JSON.stringify([...pokemonsList])
+        );
+      } else {
+        var allPokemons = String(localStorage.getItem(STORAGE_POKEMONS));
+
+        var pokemons = JSON.parse(allPokemons) as Pokemon[];
+        localStorage.setItem(
+          STORAGE_POKEMONS,
+          JSON.stringify([...pokemons, ...pokemonsList])
+        );
+      }
+
+      yield put(loadSuccess(pokemonsList, initial));
+    } catch (error) {
+      console.error(error);
+      yield put(loadFailure());
+    }
+  },
+  function* handleError() {
     yield put(loadFailure());
-  }
-}
+  },
+  5
+);
 
 export default all([takeEvery(ActionTypes.LOAD_REQUEST, loadPokemons)]);
