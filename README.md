@@ -77,7 +77,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 Esse projeto foi utilizou das seguintes lib:
 
 - redux
-- redux-agas
+- redux-sagas
 - react-icons
 - swiper
 - axios
