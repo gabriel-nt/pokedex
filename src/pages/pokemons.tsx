@@ -55,41 +55,12 @@ const Pokemons: NextPage = () => {
           throw new Error('Incomplete list');
         }
 
-        dispatch(
-          loadSuccess(
-            filterPokemonsByGen({
-              data: pokemons,
-              offset: generations[0].offset,
-              limit: generations[0].limit,
-            }),
-            true
-          )
-        );
-
-        dispatch(
-          loadSuccess(
-            filterPokemonsByGen({
-              data: pokemons,
-              offset: generations[0].limit,
-              limit: pokemons.length,
-            }),
-            false
-          )
-        );
+        dispatch(loadSuccess(pokemons));
       }
     } catch (e) {
       dispatch(
         loadRequest({
-          initial: true,
-          limit: DEFAULT_LIMIT,
           offset: 0,
-        })
-      );
-
-      dispatch(
-        loadRequest({
-          initial: false,
-          offset: DEFAULT_OFFSET,
           limit: TOTAL_LIMIT,
         })
       );

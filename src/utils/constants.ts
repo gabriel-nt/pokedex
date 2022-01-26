@@ -19,7 +19,7 @@ import electric from '../assets/badges/electric.jpg';
 
 import { OrderOptions } from '../store/modules/pokemons/types';
 
-export const TOTAL_LIMIT = 817;
+export const TOTAL_LIMIT = 898;
 export const DEFAULT_LIMIT = 81;
 export const DEFAULT_OFFSET = 81;
 export const STORAGE_POKEMONS = '@pokemons/STORAGE_POKEMONS';

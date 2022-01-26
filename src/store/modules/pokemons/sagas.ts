@@ -2,9 +2,9 @@ import { AxiosResponse } from 'axios';
 import { all, call, put, takeEvery } from 'redux-saga/effects';
 
 import { api } from '../../../services/api';
+import { ActionTypes, LoadPokemons } from './types';
 import { loadFailure, loadSuccess } from './actions';
 import { STORAGE_POKEMONS } from '../../../utils/constants';
-import { ActionTypes, LoadPokemons, Pokemon } from './types';
 import { ListResponse, PokemonResponse } from '../../../shared/types';
 
 type Params = LoadPokemons & { type: string };
@@ -43,7 +43,7 @@ const multipleAttempts = (
 };
 
 const loadPokemons = multipleAttempts(
-  function* loadPokemons({ initial, offset, limit }: Params) {
+  function* loadPokemons({ offset, limit }: Params) {
     try {
       const { data }: AxiosResponse<ListResponse> = yield call(
         api.get,
@@ -75,22 +75,9 @@ const loadPokemons = multipleAttempts(
           : item.data.sprites.other['official-artwork'].front_default,
       }));
 
-      if (initial) {
-        localStorage.setItem(
-          STORAGE_POKEMONS,
-          JSON.stringify([...pokemonsList])
-        );
-      } else {
-        var allPokemons = String(localStorage.getItem(STORAGE_POKEMONS));
+      localStorage.setItem(STORAGE_POKEMONS, JSON.stringify([...pokemonsList]));
 
-        var pokemons = JSON.parse(allPokemons) as Pokemon[];
-        localStorage.setItem(
-          STORAGE_POKEMONS,
-          JSON.stringify([...pokemons, ...pokemonsList])
-        );
-      }
-
-      yield put(loadSuccess(pokemonsList, initial));
+      yield put(loadSuccess(pokemonsList));
     } catch (error) {
       console.error(error);
       yield put(loadFailure());

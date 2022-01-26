@@ -39,7 +39,6 @@ export interface PokemonsState {
 export type LoadPokemons = {
   offset: number;
   limit: number;
-  initial: boolean;
 };
 
 export type OrderOptions = {

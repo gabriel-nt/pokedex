@@ -6,20 +6,18 @@ import {
   FilterOptions,
 } from './types';
 
-export const loadRequest = ({ initial, limit, offset }: LoadPokemons) => {
+export const loadRequest = ({ limit, offset }: LoadPokemons) => {
   return {
     type: ActionTypes.LOAD_REQUEST,
     offset,
     limit,
-    initial,
   };
 };
 
-export const loadSuccess = (payload: Pokemon[], initial: boolean) => {
+export const loadSuccess = (payload: Pokemon[]) => {
   return {
     type: ActionTypes.LOAD_SUCCCES,
     payload,
-    initial,
   };
 };
 

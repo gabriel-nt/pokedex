@@ -39,13 +39,17 @@ const reducer: Reducer<PokemonsState> = (state = INITIAL_STATE, action) => {
     case ActionTypes.LOAD_REQUEST:
       return { ...state, loaded: false };
     case ActionTypes.LOAD_SUCCCES:
-      if (action.initial) {
-        return { ...state, loaded: true, currentPokemons: action.payload };
-      }
+      const currentFilter = state.filter;
 
       return {
         ...state,
-        allPokemons: [...state.currentPokemons, ...action.payload],
+        loaded: true,
+        currentPokemons: filterPokemonsByGen({
+          data: action.payload,
+          limit: currentFilter.limit,
+          offset: currentFilter.offset,
+        }),
+        allPokemons: action.payload,
       };
     case ActionTypes.LOAD_FAILURE:
       return { ...state, loaded: true, error: true };
