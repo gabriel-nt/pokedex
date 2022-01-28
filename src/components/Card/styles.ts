@@ -12,7 +12,7 @@ export const Container = styled.div<IContainerProps>`
   position: relative;
   margin: 2rem 1.25rem;
   border-radius: 0.75rem;
-  transition: all 0.8s ease;
+  transition: all 0.5s ease;
   background-color: ${({ theme, type }) => theme.backgrounds[type]};
   box-shadow: 0 0 1.25rem 0 ${({ theme, type }) => theme.backgrounds[type]};
 
@@ -45,6 +45,7 @@ export const Container = styled.div<IContainerProps>`
     min-width: auto;
     padding: 1.6rem;
     margin: 1rem 0.5rem;
+    max-width: calc(100vw - 4rem);
 
     &:hover {
       > .img-container {
